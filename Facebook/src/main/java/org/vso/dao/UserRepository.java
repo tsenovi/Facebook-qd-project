@@ -23,7 +23,7 @@ public class UserRepository {
 
     private void init() {
         try {
-             entityManagerFactory = new HibernateUtil().buildEntityManagerFactory();
+            entityManagerFactory = new HibernateUtil().buildEntityManagerFactory();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -39,21 +39,6 @@ public class UserRepository {
     private void closeEntityManagerInTransaction(EntityManager entityManager) {
         entityManager.getTransaction().commit();
         entityManager.close();
-    }
-
-    public List<User> readAllUsers() {
-        EntityManager entityManager = getEntityManagerInTransaction();
-
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<User> criteria = builder.createQuery(User.class);
-
-        Root<User> root = criteria.from(User.class);
-        criteria.select(root);
-        List<User> resultList = entityManager.createQuery(criteria).getResultList();
-
-        closeEntityManagerInTransaction(entityManager);
-
-        return resultList;
     }
 
     public void createUser(User user) {
@@ -75,7 +60,7 @@ public class UserRepository {
         closeEntityManagerInTransaction(entityManager);
     }
 
-    public User getUserByEmail(String email) {
+    public User readUserByEmail(String email) {
         EntityManager entityManager = getEntityManagerInTransaction();
 
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -83,14 +68,17 @@ public class UserRepository {
         Root<User> root = criteria.from(User.class);
         criteria.select(root);
         criteria.where(builder.equal(root.get(User_.EMAIL), email));
-
-        User result = entityManager.createQuery(criteria).getSingleResult();
-
+        User result;
+        try {
+            result = entityManager.createQuery(criteria).getSingleResult();
+        } catch (Exception e) {
+            result = null;
+        }
         closeEntityManagerInTransaction(entityManager);
-
         return result;
     }
 
+    //TODO
     public List<User> updateUser(User user) {
         return null;
     }

@@ -1,18 +1,18 @@
 package org.vso.presenters;
 
 import org.vso.constants.Participant;
-import org.vso.domain.RegistrationService;
+import org.vso.domain.AuthenticationService;
 import org.vso.dto.UserDTO;
 import org.vso.views.RegistrationView;
 
 public class RegistrationPresenter {
 
-    private final RegistrationService registrationService;
+    private final AuthenticationService authenticationService;
     private final RegistrationView registrationView;
 
     public RegistrationPresenter(RegistrationView registrationView) {
         this.registrationView = registrationView;
-        this.registrationService = new RegistrationService();
+        this.authenticationService = new AuthenticationService();
     }
 
     public void onViewShown() {
@@ -21,10 +21,8 @@ public class RegistrationPresenter {
     }
 
     private void onInstructionsShown() {
-        boolean isRegistered = registrationService.onUserInfoEntered(getUserInfo());
-        if(isRegistered){
-            registrationView.showRegistrationSuccess();
-        }
+        boolean isRegistered = authenticationService.onUserInfoEntered(getUserInfo());
+        if (isRegistered) registrationView.showRegistrationSuccess();
         else registrationView.showRegistrationError();
     }
 
