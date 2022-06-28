@@ -2,14 +2,29 @@ plugins {
     id 'java'
 }
 
-group 'org.example'
+group 'org.vso'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+
+    maven {
+        url "https://mvnrepository.com/artifact/com.google.inject/guice"
+    }
+
+    maven {
+        url "https://mvnrepository.com/artifact/org.hibernate/hibernate-core"
+    }
 }
 
 dependencies {
+    implementation 'org.postgresql:postgresql:42.3.6'
+    implementation group: 'com.google.inject', name: 'guice', version: '5.1.0'
+    implementation 'org.hibernate:hibernate-core-jakarta:5.6.9.Final'
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '6.1.0.Final', ext: 'pom'
+    implementation group: 'org.hibernate', name: 'hibernate-tools', version: '3.2.3.GA'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:4.0.0'
+    annotationProcessor('org.hibernate:hibernate-jpamodelgen:6.0.2.Final')
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
