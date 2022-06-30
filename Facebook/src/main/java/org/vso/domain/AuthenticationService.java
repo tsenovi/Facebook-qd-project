@@ -15,7 +15,7 @@ public class AuthenticationService {
         this.loggedUser = null;
     }
 
-    public boolean onUserInfoEntered(UserDTO userDTO) {
+    public boolean registerUser(UserDTO userDTO) {
         boolean userExists = ifUserExists(userDTO);
         if (userExists) return false;
 
@@ -24,7 +24,7 @@ public class AuthenticationService {
         return true;
     }
 
-    public boolean ifUserExists(UserDTO userDTO) {
+    private boolean ifUserExists(UserDTO userDTO) {
         User userByEmail = userRepository.readUserByEmail(userDTO.getEmail());
         if (userByEmail != null) {
             loggedUser = userByEmail;

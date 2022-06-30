@@ -3,6 +3,7 @@ package org.vso.presenters;
 import org.vso.constants.Participant;
 import org.vso.domain.AuthenticationService;
 import org.vso.dto.UserDTO;
+import org.vso.utils.EmailValidator;
 import org.vso.views.RegistrationView;
 
 public class RegistrationPresenter {
@@ -10,9 +11,12 @@ public class RegistrationPresenter {
     private final AuthenticationService authenticationService;
     private final RegistrationView registrationView;
 
+    private final EmailValidator emailValidator;
+
     public RegistrationPresenter(RegistrationView registrationView) {
         this.registrationView = registrationView;
         this.authenticationService = new AuthenticationService();
+        this.emailValidator = new EmailValidator();
     }
 
     public void onViewShown() {
@@ -21,13 +25,17 @@ public class RegistrationPresenter {
     }
 
     private void onInstructionsShown() {
-        boolean isRegistered = authenticationService.onUserInfoEntered(getUserInfo());
+        boolean isRegistered = authenticationService.registerUser(getUserInfo());
         if (isRegistered) registrationView.showRegistrationSuccess();
         else registrationView.showRegistrationError();
     }
 
     private UserDTO getUserInfo() {
-        String userEmail = registrationView.getUserTextInput("Email: ");
+        String userEmail;
+        do {
+            userEmail = registrationView.getUserTextInput("Email: ");
+        } while (!emailValidator.isValidEmail(userEmail));
+
         String userPassword;
         String userRepeatedPassword;
         do {
