@@ -31,26 +31,55 @@ public class RegistrationPresenter {
     }
 
     private UserDTO getUserInfo() {
-        String userEmail;
-        do {
-            userEmail = registrationView.getUserTextInput("Email: ");
-        } while (!emailValidator.isValidEmail(userEmail));
+        String userEmail = getUserEmail();
+        String userPassword = getUserPassword();
+        String userFirstName = getUserFirstName();
+        String userLastName = getUserLastName();
+        int userAge = getUserAge();
 
+        return new UserDTO(userEmail, userPassword, userFirstName, userLastName, userAge);
+    }
+
+    private int getUserAge() {
+        int userAge;
+        do {
+            registrationView.askUserForAgeInput();
+            userAge = registrationView.getUserDecimalInput();
+        } while (userAge < Participant.MIN_AGE);
+
+        return userAge;
+    }
+
+    private String getUserLastName() {
+        registrationView.askUserForLastNameInput();
+        return registrationView.getUserTextInput();
+    }
+
+    private String getUserFirstName() {
+        registrationView.askUserForFirstNameInput();
+        return registrationView.getUserTextInput();
+    }
+
+    private String getUserPassword() {
         String userPassword;
         String userRepeatedPassword;
         do {
-            userPassword = registrationView.getUserTextInput("Password: ");
-            userRepeatedPassword = registrationView.getUserTextInput("Repeat password: ");
+            registrationView.askUserForPasswordInput();
+            userPassword = registrationView.getUserTextInput();
+            registrationView.askUserForPasswordRepeatInput();
+            userRepeatedPassword = registrationView.getUserTextInput();
         } while (!userPassword.equals(userRepeatedPassword));
 
-        String userFirstName = registrationView.getUserTextInput("First name: ");
-        String userLastName = registrationView.getUserTextInput("Last name: ");
+        return userPassword;
+    }
 
-        int userAge;
+    private String getUserEmail() {
+        String userEmail;
         do {
-            userAge = registrationView.getUserDecimalInput("Age: ");
-        } while (userAge < Participant.MIN_AGE);
+            registrationView.askUserForEmailInput();
+            userEmail = registrationView.getUserTextInput();
+        } while (!emailValidator.isValidEmail(userEmail));
 
-        return new UserDTO(userEmail, userPassword, userFirstName, userLastName, userAge);
+        return userEmail;
     }
 }
