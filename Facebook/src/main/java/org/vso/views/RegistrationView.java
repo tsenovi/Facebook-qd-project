@@ -15,30 +15,52 @@ public class RegistrationView {
         registrationPresenter.onViewShown();
     }
 
-    public String getUserTextInput(String text) {
-        show(text);
+    public void show(String text) {
+        System.out.println(text);
+    }
+
+    public String getUserTextInput() {
         return scanner.nextLine();
     }
 
-    public Integer getUserDecimalInput(String text) {
-        show(text);
+    public Integer getUserDecimalInput() {
         return scanner.nextInt();
     }
 
     public void showRegistrationInstructions() {
-        show("""
-                To register, please enter your information below:""");
+        show("\tRegistration Form");
     }
 
     public void showRegistrationSuccess() {
-        show("Registration Successful");
+        show("Registration Successful!");
     }
 
     public void showRegistrationError() {
-        show("Registration Failure");
+        show("Registration Failed!");
     }
 
-    public void show(String text) {
-        System.out.println(text);
+    public void askUserForEmailInput() {
+        show("Email: ");
+    }
+
+    public void askUserForPasswordInput() {
+        show("Password: ");
+    }
+
+    public void askUserForPasswordRepeatInput() {
+        show("Repeat password: ");
+    }
+
+    public void askUserForFirstNameInput() {
+        show("First name: ");
+    }
+
+    public void askUserForLastNameInput() {
+        show("Last name: ");
+    }
+
+    public void askUserForAgeInput() {
+        show("Users under 14 are not allowed to create account!");
+        show("Age: ");
     }
 }
