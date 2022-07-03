@@ -24,7 +24,7 @@ public class RegistrationView {
     }
 
     public Integer getUserDecimalInput() {
-        return scanner.nextInt();
+        return Integer.parseInt(getUserTextInput());
     }
 
     public void showRegistrationInstructions() {

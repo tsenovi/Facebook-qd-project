@@ -1,7 +1,8 @@
 package org.vso.domain;
 
 import org.junit.jupiter.api.Test;
-import org.vso.dto.UserDTO;
+import org.vso.constants.RegistrationStatus;
+import org.vso.dto.UserRegistrationDTO;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,17 +10,17 @@ class AuthenticationServiceTest {
 
     @Test
     void testRegisterUserWhenUserExistsThenRegistrationFail() {
-        UserDTO userDTO = new UserDTO("ivan@gmail.com", "111",
+        UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO("ivan@gmail.com", "111",
                 "Ivan", "Tsenov", 31);
         var authenticationService = new AuthenticationService();
-        assertFalse(authenticationService.registerUser(userDTO));
+        assertEquals(RegistrationStatus.REGISTRATION_FAILED, authenticationService.registerUser(userRegistrationDTO));
     }
 
     @Test
     void testRegisterUserWhenUserNotExistsThenRegistrationSuccess() {
-        UserDTO userDTO = new UserDTO("georgi@gmail.com", "161",
+        UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO("georgi@gmail.com", "161",
                 "Georgi", "Ivanov", 21);
         var authenticationService = new AuthenticationService();
-        assertTrue(authenticationService.registerUser(userDTO));
+        assertEquals(RegistrationStatus.REGISTRATION_SUCCESSFUL, authenticationService.registerUser(userRegistrationDTO));
     }
 }

@@ -1,16 +1,16 @@
 package org.vso.presenters;
 
 import org.vso.constants.Participant;
+import org.vso.constants.RegistrationStatus;
 import org.vso.domain.AuthenticationService;
-import org.vso.dto.UserDTO;
+import org.vso.dto.UserRegistrationDTO;
 import org.vso.utils.EmailValidator;
 import org.vso.views.RegistrationView;
 
 public class RegistrationPresenter {
 
-    private final AuthenticationService authenticationService;
     private final RegistrationView registrationView;
-
+    private final AuthenticationService authenticationService;
     private final EmailValidator emailValidator;
 
     public RegistrationPresenter(RegistrationView registrationView) {
@@ -25,19 +25,21 @@ public class RegistrationPresenter {
     }
 
     private void onInstructionsShown() {
-        boolean isRegistered = authenticationService.registerUser(getUserInfo());
-        if (isRegistered) registrationView.showRegistrationSuccess();
+        UserRegistrationDTO userRegistrationInfo = getUserInfo();
+        RegistrationStatus registrationStatus = authenticationService.registerUser(userRegistrationInfo);
+        if (registrationStatus == RegistrationStatus.REGISTRATION_SUCCESSFUL)
+            registrationView.showRegistrationSuccess();
         else registrationView.showRegistrationError();
     }
 
-    private UserDTO getUserInfo() {
+    private UserRegistrationDTO getUserInfo() {
         String userEmail = getUserEmail();
         String userPassword = getUserPassword();
         String userFirstName = getUserFirstName();
         String userLastName = getUserLastName();
         int userAge = getUserAge();
 
-        return new UserDTO(userEmail, userPassword, userFirstName, userLastName, userAge);
+        return new UserRegistrationDTO(userEmail, userPassword, userFirstName, userLastName, userAge);
     }
 
     private int getUserAge() {

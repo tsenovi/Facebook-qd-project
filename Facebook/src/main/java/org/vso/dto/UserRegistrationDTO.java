@@ -1,6 +1,6 @@
 package org.vso.dto;
 
-public class UserDTO {
+public class UserRegistrationDTO {
 
     private String email;
     private String password;
@@ -8,7 +8,7 @@ public class UserDTO {
     private String lastName;
     private Integer age;
 
-    public UserDTO(String email, String password, String firstName, String lastName, Integer age) {
+    public UserRegistrationDTO(String email, String password, String firstName, String lastName, Integer age) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
