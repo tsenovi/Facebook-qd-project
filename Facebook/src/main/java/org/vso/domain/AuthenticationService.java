@@ -9,13 +9,18 @@ import org.vso.dto.UserLoginDTO;
 import org.vso.dto.UserRegistrationDTO;
 
 public class AuthenticationService {
-
+    private static AuthenticationService instance;
     private final UserRepository userRepository;
     private User loggedUser;
 
-    public AuthenticationService() {
+    private AuthenticationService() {
         this.userRepository = new UserRepository();
         this.loggedUser = null;
+    }
+
+    public static AuthenticationService getInstance() {
+        if (instance == null) instance = new AuthenticationService();
+        return instance;
     }
 
     public LoginStatus login(UserLoginDTO userLoginInfo) {
@@ -29,22 +34,14 @@ public class AuthenticationService {
     }
 
     public RegistrationStatus registerUser(UserRegistrationDTO userRegistrationDTO) {
-        boolean userExists = ifUserExists(userRegistrationDTO.getEmail());
-        if (userExists) return RegistrationStatus.REGISTRATION_FAILED;
+        User userByEmail = userRepository.readUserByEmail(userRegistrationDTO.getEmail());
+        if (userByEmail != null) return RegistrationStatus.REGISTRATION_FAILED;
 
         User user = mapUserDTOtoUser(userRegistrationDTO);
         userRepository.createUser(user);
+        loggedUser = user;
+
         return RegistrationStatus.REGISTRATION_SUCCESSFUL;
-    }
-
-    private boolean ifUserExists(String email) {
-        User userByEmail = userRepository.readUserByEmail(email);
-        if (userByEmail != null) {
-            loggedUser = userByEmail;
-            return true;
-        }
-
-        return false;
     }
 
     public PublicUser getLoggedUser() {
@@ -53,6 +50,10 @@ public class AuthenticationService {
 
     public boolean hasLoggedUser() {
         return loggedUser != null;
+    }
+
+    public void onUserLogoutSelected() {
+        this.loggedUser = null;
     }
 
     private User mapUserDTOtoUser(UserRegistrationDTO userRegistrationDTO) {

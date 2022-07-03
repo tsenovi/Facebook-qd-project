@@ -58,6 +58,7 @@ public class LoginView {
 
     public void showUserInstructions() {
         show("""
+                \tFacebook
                 1. Login Form
                 2. Registration Form
                 3. Reset password Form""");

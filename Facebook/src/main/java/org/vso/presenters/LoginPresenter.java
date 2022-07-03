@@ -1,11 +1,11 @@
 package org.vso.presenters;
 
 import org.vso.constants.LoginStatus;
-import org.vso.constants.RegistrationStatus;
 import org.vso.domain.AuthenticationService;
 import org.vso.dto.UserLoginDTO;
 import org.vso.utils.EmailValidator;
 import org.vso.views.LoginView;
+import org.vso.views.ProfileView;
 import org.vso.views.RegistrationView;
 
 public class LoginPresenter {
@@ -14,19 +14,22 @@ public class LoginPresenter {
 
     private RegistrationView registrationView;
 
+    private ProfileView profileView;
+
     private final AuthenticationService authenticationService;
 
     private final EmailValidator emailValidator;
 
     public LoginPresenter(LoginView loginView) {
         this.loginView = loginView;
-        this.authenticationService = new AuthenticationService();
+        this.authenticationService = AuthenticationService.getInstance();
         this.emailValidator = new EmailValidator();
         this.registrationView = null;
+        this.profileView = null;
     }
 
     public void onViewShown() {
-        while (true) {
+        while (!authenticationService.hasLoggedUser()) {
             loginView.showUserInstructions();
             int userOption = loginView.getUserDecimalInput();
             switch (userOption) {
@@ -55,8 +58,10 @@ public class LoginPresenter {
     private void onInstructionsShown() {
         UserLoginDTO userLoginInfo = getUserLoginInfo();
         LoginStatus loginStatus = authenticationService.login(userLoginInfo);
-        if (loginStatus == LoginStatus.LOGIN_SUCCESSFUL) loginView.showLoginSuccessful();
-        else loginView.showLoginError();
+        if (loginStatus == LoginStatus.LOGIN_SUCCESSFUL) {
+            loginView.showLoginSuccessful();
+            this.profileView = new ProfileView();
+        } else loginView.showLoginError();
     }
 
     private UserLoginDTO getUserLoginInfo() {

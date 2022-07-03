@@ -5,18 +5,24 @@ import org.vso.constants.RegistrationStatus;
 import org.vso.domain.AuthenticationService;
 import org.vso.dto.UserRegistrationDTO;
 import org.vso.utils.EmailValidator;
+import org.vso.views.ProfileView;
 import org.vso.views.RegistrationView;
 
 public class RegistrationPresenter {
 
     private final RegistrationView registrationView;
+
+    private ProfileView profileView;
+
     private final AuthenticationService authenticationService;
+
     private final EmailValidator emailValidator;
 
     public RegistrationPresenter(RegistrationView registrationView) {
         this.registrationView = registrationView;
-        this.authenticationService = new AuthenticationService();
+        this.authenticationService = AuthenticationService.getInstance();
         this.emailValidator = new EmailValidator();
+        this.profileView = null;
     }
 
     public void onViewShown() {
@@ -27,9 +33,10 @@ public class RegistrationPresenter {
     private void onInstructionsShown() {
         UserRegistrationDTO userRegistrationInfo = getUserInfo();
         RegistrationStatus registrationStatus = authenticationService.registerUser(userRegistrationInfo);
-        if (registrationStatus == RegistrationStatus.REGISTRATION_SUCCESSFUL)
+        if (registrationStatus == RegistrationStatus.REGISTRATION_SUCCESSFUL) {
             registrationView.showRegistrationSuccess();
-        else registrationView.showRegistrationError();
+            this.profileView = new ProfileView();
+        } else registrationView.showRegistrationError();
     }
 
     private UserRegistrationDTO getUserInfo() {
