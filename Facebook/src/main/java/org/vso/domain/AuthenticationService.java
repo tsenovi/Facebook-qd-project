@@ -1,9 +1,12 @@
 package org.vso.domain;
 
+import org.vso.constants.LoginStatus;
+import org.vso.constants.RegistrationStatus;
 import org.vso.dao.UserRepository;
 import org.vso.data.PublicUser;
 import org.vso.data.User;
-import org.vso.dto.UserDTO;
+import org.vso.dto.UserLoginDTO;
+import org.vso.dto.UserRegistrationDTO;
 
 public class AuthenticationService {
 
@@ -15,21 +18,32 @@ public class AuthenticationService {
         this.loggedUser = null;
     }
 
-    public boolean registerUser(UserDTO userDTO) {
-        boolean userExists = ifUserExists(userDTO);
-        if (userExists) return false;
+    public LoginStatus login(UserLoginDTO userLoginInfo) {
+        User userByEmail = userRepository.readUserByEmail(userLoginInfo.getEmail());
+        if (userByEmail != null && userByEmail.getPassword().equals(userLoginInfo.getPassword())) {
+            loggedUser = userByEmail;
+            return LoginStatus.LOGIN_SUCCESSFUL;
+        }
 
-        User user = mapUserDTOtoUser(userDTO);
-        userRepository.createUser(user);
-        return true;
+        return LoginStatus.LOGIN_FAILED;
     }
 
-    private boolean ifUserExists(UserDTO userDTO) {
-        User userByEmail = userRepository.readUserByEmail(userDTO.getEmail());
+    public RegistrationStatus registerUser(UserRegistrationDTO userRegistrationDTO) {
+        boolean userExists = ifUserExists(userRegistrationDTO.getEmail());
+        if (userExists) return RegistrationStatus.REGISTRATION_FAILED;
+
+        User user = mapUserDTOtoUser(userRegistrationDTO);
+        userRepository.createUser(user);
+        return RegistrationStatus.REGISTRATION_SUCCESSFUL;
+    }
+
+    private boolean ifUserExists(String email) {
+        User userByEmail = userRepository.readUserByEmail(email);
         if (userByEmail != null) {
             loggedUser = userByEmail;
             return true;
         }
+
         return false;
     }
 
@@ -37,8 +51,12 @@ public class AuthenticationService {
         return new PublicUser(loggedUser);
     }
 
-    private User mapUserDTOtoUser(UserDTO userDTO) {
-        return new User(userDTO.getEmail(), userDTO.getPassword(),
-                userDTO.getFirstName(), userDTO.getLastName(), userDTO.getAge());
+    public boolean hasLoggedUser() {
+        return loggedUser != null;
+    }
+
+    private User mapUserDTOtoUser(UserRegistrationDTO userRegistrationDTO) {
+        return new User(userRegistrationDTO.getEmail(), userRegistrationDTO.getPassword(),
+                userRegistrationDTO.getFirstName(), userRegistrationDTO.getLastName(), userRegistrationDTO.getAge());
     }
 }
