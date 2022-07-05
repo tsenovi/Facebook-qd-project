@@ -1,57 +1,75 @@
-package org.vso.domain;
+package org.vso.domain.implementations;
 
 import org.vso.constants.LoginStatus;
 import org.vso.constants.RegistrationStatus;
-import org.vso.dao.UserRepository;
+import org.vso.dao.contracts.UserDao;
+import org.vso.dao.implementations.UserDaoImpl;
 import org.vso.data.PublicUser;
 import org.vso.data.User;
+import org.vso.domain.contracts.AuthenticationService;
 import org.vso.dto.UserLoginDTO;
 import org.vso.dto.UserRegistrationDTO;
 
-public class AuthenticationService {
+import java.util.Optional;
+
+public class AuthenticationServiceImpl implements AuthenticationService {
+
     private static AuthenticationService instance;
-    private final UserRepository userRepository;
+    private final UserDao<User> userDao;
     private User loggedUser;
 
-    private AuthenticationService() {
-        this.userRepository = new UserRepository();
+    private AuthenticationServiceImpl() {
+        this.userDao = new UserDaoImpl();
         this.loggedUser = null;
     }
 
     public static AuthenticationService getInstance() {
-        if (instance == null) instance = new AuthenticationService();
+        if (instance == null) {
+            instance = new AuthenticationServiceImpl();
+        }
+
         return instance;
     }
 
+    @Override
     public LoginStatus login(UserLoginDTO userLoginInfo) {
-        User userByEmail = userRepository.readUserByEmail(userLoginInfo.getEmail());
-        if (userByEmail != null && userByEmail.getPassword().equals(userLoginInfo.getPassword())) {
-            loggedUser = userByEmail;
-            return LoginStatus.LOGIN_SUCCESSFUL;
+        Optional<User> optionalUser = userDao.getByEmail(userLoginInfo.getEmail());
+        if (optionalUser.isPresent()) {
+            if (optionalUser.get().getPassword().equals(userLoginInfo.getPassword())) {
+                loggedUser = optionalUser.get();
+
+                return LoginStatus.LOGIN_SUCCESSFUL;
+            }
         }
 
         return LoginStatus.LOGIN_FAILED;
     }
 
+    @Override
     public RegistrationStatus registerUser(UserRegistrationDTO userRegistrationDTO) {
-        User userByEmail = userRepository.readUserByEmail(userRegistrationDTO.getEmail());
-        if (userByEmail != null) return RegistrationStatus.REGISTRATION_FAILED;
+        Optional<User> optionalUser = userDao.getByEmail(userRegistrationDTO.getEmail());
+        if (optionalUser.isPresent()) {
+            return RegistrationStatus.REGISTRATION_FAILED;
+        }
 
         User user = mapUserDTOtoUser(userRegistrationDTO);
-        userRepository.createUser(user);
+        userDao.save(user);
         loggedUser = user;
 
         return RegistrationStatus.REGISTRATION_SUCCESSFUL;
     }
 
+    @Override
     public PublicUser getLoggedUser() {
         return new PublicUser(loggedUser);
     }
 
+    @Override
     public boolean hasLoggedUser() {
         return loggedUser != null;
     }
 
+    @Override
     public void onUserLogoutSelected() {
         this.loggedUser = null;
     }

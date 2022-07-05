@@ -1,19 +1,22 @@
-package org.vso.presenters;
+package org.vso.presenters.implementations;
 
-import org.vso.domain.AuthenticationService;
-import org.vso.views.ProfileView;
+import org.vso.domain.contracts.AuthenticationService;
+import org.vso.domain.implementations.AuthenticationServiceImpl;
+import org.vso.presenters.contracts.ProfilePresenter;
+import org.vso.views.contracts.ProfileView;
 
-public class ProfilePresenter {
+public class ProfilePresenterImpl implements ProfilePresenter {
 
     private final ProfileView profileView;
 
     private final AuthenticationService authenticationService;
 
-    public ProfilePresenter(ProfileView profileView) {
+    public ProfilePresenterImpl(ProfileView profileView) {
         this.profileView = profileView;
-        this.authenticationService = AuthenticationService.getInstance();
+        this.authenticationService = AuthenticationServiceImpl.getInstance();
     }
 
+    @Override
     public void onViewShown() {
         while (authenticationService.hasLoggedUser()) {
             profileView.showProfileOptions();

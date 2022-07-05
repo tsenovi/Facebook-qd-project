@@ -1,14 +1,19 @@
-package org.vso.presenters;
+package org.vso.presenters.implementations;
 
 import org.vso.constants.LoginStatus;
-import org.vso.domain.AuthenticationService;
+import org.vso.domain.contracts.AuthenticationService;
+import org.vso.domain.implementations.AuthenticationServiceImpl;
 import org.vso.dto.UserLoginDTO;
-import org.vso.utils.EmailValidator;
-import org.vso.views.LoginView;
-import org.vso.views.ProfileView;
-import org.vso.views.RegistrationView;
+import org.vso.presenters.contracts.LoginPresenter;
+import org.vso.utils.contracts.EmailValidator;
+import org.vso.utils.implementations.EmailValidatorImpl;
+import org.vso.views.contracts.LoginView;
+import org.vso.views.contracts.ProfileView;
+import org.vso.views.contracts.RegistrationView;
+import org.vso.views.implementations.ProfileViewImpl;
+import org.vso.views.implementations.RegistrationViewImpl;
 
-public class LoginPresenter {
+public class LoginPresenterImpl implements LoginPresenter {
 
     private final LoginView loginView;
 
@@ -20,14 +25,15 @@ public class LoginPresenter {
 
     private final EmailValidator emailValidator;
 
-    public LoginPresenter(LoginView loginView) {
+    public LoginPresenterImpl(LoginView loginView) {
         this.loginView = loginView;
-        this.authenticationService = AuthenticationService.getInstance();
-        this.emailValidator = new EmailValidator();
+        this.authenticationService = AuthenticationServiceImpl.getInstance();
+        this.emailValidator = new EmailValidatorImpl();
         this.registrationView = null;
         this.profileView = null;
     }
 
+    @Override
     public void onViewShown() {
         while (!authenticationService.hasLoggedUser()) {
             loginView.showUserInstructions();
@@ -47,21 +53,23 @@ public class LoginPresenter {
     }
 
     private void runRegistrationProcess() {
-        this.registrationView = new RegistrationView();
+        this.registrationView = new RegistrationViewImpl();
     }
 
     private void runLoginProcess() {
         loginView.showLoginInstructions();
-        onInstructionsShown();
+        onLoginInstructionsShown();
     }
 
-    private void onInstructionsShown() {
+    private void onLoginInstructionsShown() {
         UserLoginDTO userLoginInfo = getUserLoginInfo();
         LoginStatus loginStatus = authenticationService.login(userLoginInfo);
         if (loginStatus == LoginStatus.LOGIN_SUCCESSFUL) {
             loginView.showLoginSuccessful();
-            this.profileView = new ProfileView();
-        } else loginView.showLoginError();
+            this.profileView = new ProfileViewImpl();
+        } else {
+            loginView.showLoginError();
+        }
     }
 
     private UserLoginDTO getUserLoginInfo() {
@@ -73,6 +81,7 @@ public class LoginPresenter {
 
     private String getUserPassword() {
         loginView.askUserForPasswordInput();
+
         return loginView.getUserTextInput();
     }
 

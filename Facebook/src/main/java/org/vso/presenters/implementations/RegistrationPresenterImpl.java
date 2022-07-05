@@ -1,14 +1,18 @@
-package org.vso.presenters;
+package org.vso.presenters.implementations;
 
 import org.vso.constants.Participant;
 import org.vso.constants.RegistrationStatus;
-import org.vso.domain.AuthenticationService;
+import org.vso.domain.contracts.AuthenticationService;
+import org.vso.domain.implementations.AuthenticationServiceImpl;
 import org.vso.dto.UserRegistrationDTO;
-import org.vso.utils.EmailValidator;
-import org.vso.views.ProfileView;
-import org.vso.views.RegistrationView;
+import org.vso.presenters.contracts.RegistrationPresenter;
+import org.vso.utils.contracts.EmailValidator;
+import org.vso.utils.implementations.EmailValidatorImpl;
+import org.vso.views.contracts.ProfileView;
+import org.vso.views.implementations.ProfileViewImpl;
+import org.vso.views.contracts.RegistrationView;
 
-public class RegistrationPresenter {
+public class RegistrationPresenterImpl implements RegistrationPresenter {
 
     private final RegistrationView registrationView;
 
@@ -18,13 +22,14 @@ public class RegistrationPresenter {
 
     private final EmailValidator emailValidator;
 
-    public RegistrationPresenter(RegistrationView registrationView) {
+    public RegistrationPresenterImpl(RegistrationView registrationView) {
         this.registrationView = registrationView;
-        this.authenticationService = AuthenticationService.getInstance();
-        this.emailValidator = new EmailValidator();
+        this.authenticationService = AuthenticationServiceImpl.getInstance();
+        this.emailValidator = new EmailValidatorImpl();
         this.profileView = null;
     }
 
+    @Override
     public void onViewShown() {
         registrationView.showRegistrationInstructions();
         onInstructionsShown();
@@ -35,8 +40,10 @@ public class RegistrationPresenter {
         RegistrationStatus registrationStatus = authenticationService.registerUser(userRegistrationInfo);
         if (registrationStatus == RegistrationStatus.REGISTRATION_SUCCESSFUL) {
             registrationView.showRegistrationSuccess();
-            this.profileView = new ProfileView();
-        } else registrationView.showRegistrationError();
+            this.profileView = new ProfileViewImpl();
+        } else {
+            registrationView.showRegistrationError();
+        }
     }
 
     private UserRegistrationDTO getUserInfo() {
@@ -61,11 +68,13 @@ public class RegistrationPresenter {
 
     private String getUserLastName() {
         registrationView.askUserForLastNameInput();
+
         return registrationView.getUserTextInput();
     }
 
     private String getUserFirstName() {
         registrationView.askUserForFirstNameInput();
+
         return registrationView.getUserTextInput();
     }
 
