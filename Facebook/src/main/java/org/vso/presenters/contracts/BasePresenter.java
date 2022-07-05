@@ -1,5 +1,5 @@
 package org.vso.presenters.contracts;
 
-public interface ProfilePresenter {
+public interface BasePresenter {
     void onViewShown();
 }

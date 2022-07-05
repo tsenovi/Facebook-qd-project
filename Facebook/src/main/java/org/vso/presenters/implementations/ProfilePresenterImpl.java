@@ -2,10 +2,10 @@ package org.vso.presenters.implementations;
 
 import org.vso.domain.contracts.AuthenticationService;
 import org.vso.domain.implementations.AuthenticationServiceImpl;
-import org.vso.presenters.contracts.ProfilePresenter;
+import org.vso.presenters.contracts.BasePresenter;
 import org.vso.views.contracts.ProfileView;
 
-public class ProfilePresenterImpl implements ProfilePresenter {
+public class ProfilePresenterImpl implements BasePresenter {
 
     private final ProfileView profileView;
 

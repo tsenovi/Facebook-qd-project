@@ -5,14 +5,14 @@ import org.vso.constants.RegistrationStatus;
 import org.vso.domain.contracts.AuthenticationService;
 import org.vso.domain.implementations.AuthenticationServiceImpl;
 import org.vso.dto.UserRegistrationDTO;
-import org.vso.presenters.contracts.RegistrationPresenter;
+import org.vso.presenters.contracts.BasePresenter;
 import org.vso.utils.contracts.EmailValidator;
 import org.vso.utils.implementations.EmailValidatorImpl;
 import org.vso.views.contracts.ProfileView;
 import org.vso.views.implementations.ProfileViewImpl;
 import org.vso.views.contracts.RegistrationView;
 
-public class RegistrationPresenterImpl implements RegistrationPresenter {
+public class RegistrationPresenterImpl implements BasePresenter {
 
     private final RegistrationView registrationView;
 

@@ -1,6 +1,6 @@
 package org.vso.views.implementations;
 
-import org.vso.presenters.contracts.RegistrationPresenter;
+import org.vso.presenters.contracts.BasePresenter;
 import org.vso.presenters.implementations.RegistrationPresenterImpl;
 import org.vso.views.contracts.RegistrationView;
 
@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class RegistrationViewImpl implements RegistrationView {
 
-    private final RegistrationPresenter registrationPresenter;
+    private final BasePresenter registrationPresenter;
 
     private final Scanner scanner;
 

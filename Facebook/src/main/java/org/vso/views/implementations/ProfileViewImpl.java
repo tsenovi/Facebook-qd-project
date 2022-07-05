@@ -1,6 +1,6 @@
 package org.vso.views.implementations;
 
-import org.vso.presenters.contracts.ProfilePresenter;
+import org.vso.presenters.contracts.BasePresenter;
 import org.vso.presenters.implementations.ProfilePresenterImpl;
 import org.vso.views.contracts.ProfileView;
 
@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ProfileViewImpl implements ProfileView {
 
-    private final ProfilePresenter profilePresenter;
+    private final BasePresenter profilePresenter;
 
     private final Scanner scanner;
 

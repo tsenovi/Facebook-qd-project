@@ -1,6 +1,6 @@
 package org.vso.views.implementations;
 
-import org.vso.presenters.contracts.LoginPresenter;
+import org.vso.presenters.contracts.BasePresenter;
 import org.vso.presenters.implementations.LoginPresenterImpl;
 import org.vso.views.contracts.LoginView;
 
@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class LoginViewImpl implements LoginView {
 
-    private final LoginPresenter loginPresenter;
+    private final BasePresenter loginPresenter;
 
     private final Scanner scanner;
 

@@ -4,7 +4,7 @@ import org.vso.constants.LoginStatus;
 import org.vso.domain.contracts.AuthenticationService;
 import org.vso.domain.implementations.AuthenticationServiceImpl;
 import org.vso.dto.UserLoginDTO;
-import org.vso.presenters.contracts.LoginPresenter;
+import org.vso.presenters.contracts.BasePresenter;
 import org.vso.utils.contracts.EmailValidator;
 import org.vso.utils.implementations.EmailValidatorImpl;
 import org.vso.views.contracts.LoginView;
@@ -13,7 +13,7 @@ import org.vso.views.contracts.RegistrationView;
 import org.vso.views.implementations.ProfileViewImpl;
 import org.vso.views.implementations.RegistrationViewImpl;
 
-public class LoginPresenterImpl implements LoginPresenter {
+public class LoginPresenterImpl implements BasePresenter {
 
     private final LoginView loginView;
 
