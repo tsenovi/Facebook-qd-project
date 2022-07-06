@@ -1,4 +1,4 @@
-package org.vso.data;
+package org.vso.models.data;
 
 public class PublicUser {
 

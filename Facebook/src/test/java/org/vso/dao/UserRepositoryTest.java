@@ -1,9 +1,9 @@
 package org.vso.dao;
 
 import org.junit.jupiter.api.Test;
-import org.vso.dao.contracts.UserDao;
-import org.vso.dao.implementations.UserDaoImpl;
-import org.vso.data.User;
+import org.vso.models.dao.contracts.UserDao;
+import org.vso.models.dao.implementations.UserDaoImpl;
+import org.vso.models.data.User;
 
 import static org.junit.jupiter.api.Assertions.*;
 

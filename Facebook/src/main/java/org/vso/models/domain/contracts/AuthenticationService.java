@@ -1,10 +1,10 @@
-package org.vso.domain.contracts;
+package org.vso.models.domain.contracts;
 
 import org.vso.constants.LoginStatus;
 import org.vso.constants.RegistrationStatus;
-import org.vso.data.PublicUser;
-import org.vso.dto.UserLoginDTO;
-import org.vso.dto.UserRegistrationDTO;
+import org.vso.models.data.PublicUser;
+import org.vso.models.dto.UserLoginDTO;
+import org.vso.models.dto.UserRegistrationDTO;
 
 public interface AuthenticationService {
 

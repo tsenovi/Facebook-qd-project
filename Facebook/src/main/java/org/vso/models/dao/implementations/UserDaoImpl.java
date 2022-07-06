@@ -1,4 +1,4 @@
-package org.vso.dao.implementations;
+package org.vso.models.dao.implementations;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -7,8 +7,8 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaDelete;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
-import org.vso.dao.contracts.UserDao;
-import org.vso.data.User;
+import org.vso.models.dao.contracts.UserDao;
+import org.vso.models.data.User;
 import org.vso.data.User_;
 import org.vso.utils.contracts.Hibernate;
 import org.vso.utils.implementations.HibernateImpl;

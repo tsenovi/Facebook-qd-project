@@ -1,4 +1,4 @@
-package org.vso.dao.contracts;
+package org.vso.models.dao.contracts;
 
 import java.util.Optional;
 

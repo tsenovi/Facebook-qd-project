@@ -2,9 +2,9 @@ package org.vso.presenters.implementations;
 
 import org.vso.constants.Participant;
 import org.vso.constants.RegistrationStatus;
-import org.vso.domain.contracts.AuthenticationService;
-import org.vso.domain.implementations.AuthenticationServiceImpl;
-import org.vso.dto.UserRegistrationDTO;
+import org.vso.models.domain.contracts.AuthenticationService;
+import org.vso.models.domain.implementations.AuthenticationServiceImpl;
+import org.vso.models.dto.UserRegistrationDTO;
 import org.vso.presenters.contracts.BasePresenter;
 import org.vso.utils.contracts.EmailValidator;
 import org.vso.utils.implementations.EmailValidatorImpl;

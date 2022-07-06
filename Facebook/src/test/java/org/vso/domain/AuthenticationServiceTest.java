@@ -3,10 +3,10 @@ package org.vso.domain;
 import org.junit.jupiter.api.Test;
 import org.vso.constants.LoginStatus;
 import org.vso.constants.RegistrationStatus;
-import org.vso.domain.contracts.AuthenticationService;
-import org.vso.domain.implementations.AuthenticationServiceImpl;
-import org.vso.dto.UserLoginDTO;
-import org.vso.dto.UserRegistrationDTO;
+import org.vso.models.domain.contracts.AuthenticationService;
+import org.vso.models.domain.implementations.AuthenticationServiceImpl;
+import org.vso.models.dto.UserLoginDTO;
+import org.vso.models.dto.UserRegistrationDTO;
 
 import static org.junit.jupiter.api.Assertions.*;
 

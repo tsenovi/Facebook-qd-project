@@ -1,14 +1,14 @@
-package org.vso.domain.implementations;
+package org.vso.models.domain.implementations;
 
 import org.vso.constants.LoginStatus;
 import org.vso.constants.RegistrationStatus;
-import org.vso.dao.contracts.UserDao;
-import org.vso.dao.implementations.UserDaoImpl;
-import org.vso.data.PublicUser;
-import org.vso.data.User;
-import org.vso.domain.contracts.AuthenticationService;
-import org.vso.dto.UserLoginDTO;
-import org.vso.dto.UserRegistrationDTO;
+import org.vso.models.dao.contracts.UserDao;
+import org.vso.models.dao.implementations.UserDaoImpl;
+import org.vso.models.data.PublicUser;
+import org.vso.models.data.User;
+import org.vso.models.domain.contracts.AuthenticationService;
+import org.vso.models.dto.UserLoginDTO;
+import org.vso.models.dto.UserRegistrationDTO;
 
 import java.util.Optional;
 

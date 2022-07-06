@@ -1,4 +1,4 @@
-package org.vso.dto;
+package org.vso.models.dto;
 
 public class UserRegistrationDTO {
 
