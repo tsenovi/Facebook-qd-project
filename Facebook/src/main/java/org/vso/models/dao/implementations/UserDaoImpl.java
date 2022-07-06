@@ -9,7 +9,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.vso.models.dao.contracts.UserDao;
 import org.vso.models.data.User;
-import org.vso.data.User_;
+import org.vso.models.data.User_;
 import org.vso.utils.contracts.Hibernate;
 import org.vso.utils.implementations.HibernateImpl;
 
