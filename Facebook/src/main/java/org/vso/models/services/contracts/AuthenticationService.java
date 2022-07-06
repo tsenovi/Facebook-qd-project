@@ -1,4 +1,4 @@
-package org.vso.models.domain.contracts;
+package org.vso.models.services.contracts;
 
 import org.vso.constants.LoginStatus;
 import org.vso.constants.RegistrationStatus;

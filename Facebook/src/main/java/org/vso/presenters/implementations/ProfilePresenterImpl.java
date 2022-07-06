@@ -1,7 +1,7 @@
 package org.vso.presenters.implementations;
 
-import org.vso.models.domain.contracts.AuthenticationService;
-import org.vso.models.domain.implementations.AuthenticationServiceImpl;
+import org.vso.models.services.contracts.AuthenticationService;
+import org.vso.models.services.implementations.AuthenticationServiceImpl;
 import org.vso.presenters.contracts.BasePresenter;
 import org.vso.views.contracts.ProfileView;
 

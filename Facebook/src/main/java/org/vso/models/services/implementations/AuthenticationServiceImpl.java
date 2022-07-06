@@ -1,4 +1,4 @@
-package org.vso.models.domain.implementations;
+package org.vso.models.services.implementations;
 
 import org.vso.constants.LoginStatus;
 import org.vso.constants.RegistrationStatus;
@@ -6,7 +6,7 @@ import org.vso.models.dao.contracts.UserDao;
 import org.vso.models.dao.implementations.UserDaoImpl;
 import org.vso.models.data.PublicUser;
 import org.vso.models.data.User;
-import org.vso.models.domain.contracts.AuthenticationService;
+import org.vso.models.services.contracts.AuthenticationService;
 import org.vso.models.dto.UserLoginDTO;
 import org.vso.models.dto.UserRegistrationDTO;
 

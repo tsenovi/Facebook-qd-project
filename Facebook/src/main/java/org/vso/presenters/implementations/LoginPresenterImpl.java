@@ -1,8 +1,8 @@
 package org.vso.presenters.implementations;
 
 import org.vso.constants.LoginStatus;
-import org.vso.models.domain.contracts.AuthenticationService;
-import org.vso.models.domain.implementations.AuthenticationServiceImpl;
+import org.vso.models.services.contracts.AuthenticationService;
+import org.vso.models.services.implementations.AuthenticationServiceImpl;
 import org.vso.models.dto.UserLoginDTO;
 import org.vso.presenters.contracts.BasePresenter;
 import org.vso.utils.contracts.EmailValidator;
