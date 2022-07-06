@@ -4,15 +4,14 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
     <persistence-unit name="Facebook" transaction-type="RESOURCE_LOCAL">
-        <class>org.vso.data.User</class>
+        <class>org.vso.models.data.User</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Facebook" />
             <property name="jakarta.persistence.jdbc.user" value="postgres" />
             <property name="jakarta.persistence.jdbc.password" value="admin" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect" />
-<!--            Show_sql to false, after project completed-->
-            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
