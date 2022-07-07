@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao<User> {
     }
 
     @Override
-    public Optional<User> getByEmail(String email) {
+    public User getByEmail(String email) {
         EntityManager entityManager = getEntityManagerInTransaction();
 
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -57,12 +57,11 @@ public class UserDaoImpl implements UserDao<User> {
         Root<User> root = criteria.from(User.class);
         criteria.select(root);
         criteria.where(builder.equal(root.get(User_.EMAIL), email));
-
-        Optional<User> singleResult = Optional.ofNullable(entityManager.createQuery(criteria).getSingleResult());
+        User user = entityManager.createQuery(criteria).getResultList().stream().findFirst().orElse(null);
 
         closeEntityManagerInTransaction(entityManager);
 
-        return singleResult;
+        return user;
     }
 
     @Override
