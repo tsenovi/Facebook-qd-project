@@ -1,8 +1,10 @@
 package org.vso.models.dao.contracts;
 
+import org.vso.models.data.User;
+
 import java.util.Optional;
 
 public interface UserDao<T> extends BaseDao<T> {
 
-    Optional<T> getByEmail(String email);
+    User getByEmail(String email);
 }

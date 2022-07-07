@@ -33,10 +33,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public LoginStatus login(UserLoginDTO userLoginInfo) {
-        Optional<User> optionalUser = userDao.getByEmail(userLoginInfo.getEmail());
-        if (optionalUser.isPresent()) {
-            if (optionalUser.get().getPassword().equals(userLoginInfo.getPassword())) {
-                loggedUser = optionalUser.get();
+        User user = userDao.getByEmail(userLoginInfo.getEmail());
+        if (user != null) {
+            if (user.getPassword().equals(userLoginInfo.getPassword())) {
+                loggedUser = user;
 
                 return LoginStatus.LOGIN_SUCCESSFUL;
             }
@@ -47,8 +47,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public RegistrationStatus registerUser(UserRegistrationDTO userRegistrationDTO) {
-        Optional<User> optionalUser = userDao.getByEmail(userRegistrationDTO.getEmail());
-        if (optionalUser.isPresent()) {
+        User optionalUser = userDao.getByEmail(userRegistrationDTO.getEmail());
+        if (optionalUser != null) {
             return RegistrationStatus.REGISTRATION_FAILED;
         }
 
