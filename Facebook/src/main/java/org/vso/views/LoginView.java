@@ -7,59 +7,45 @@ import java.util.Scanner;
 public class LoginView {
 
     private final LoginPresenter loginPresenter;
-
-    private final Scanner scanner;
+    private View view;
 
     public LoginView() {
+        this.view = new View();
         this.loginPresenter = new LoginPresenter(this);
-        this.scanner = new Scanner(System.in);
         loginPresenter.onViewShown();
     }
 
-    public void show(String text) {
-        System.out.println(text);
-    }
-
-    public String getUserTextInput() {
-        return scanner.nextLine();
-    }
-
-    public Integer getUserDecimalInput() {
-        return Integer.parseInt(getUserTextInput());
-    }
-
     public void showLoginInstructions() {
-        show("\tLogin Form");
+        view.show("\tLogin Form");
     }
 
     public void askUserForEmailInput() {
-        show("Email: ");
+        view.show("Email: ");
     }
 
     public void askUserForValidEmailInput() {
-        show("Enter valid email: ");
+        view.show("Enter valid email: ");
     }
 
     public void askUserForPasswordInput() {
-        show("Password: ");
+        view.show("Password: ");
     }
 
     public void showLoginSuccessful() {
-        show("Login Successful!");
+        view.show("Login Successful!");
     }
 
     public void showLoginError() {
-        show("Login Failed!");
+        view.show("Login Failed!");
     }
 
     public void showOptionError() {
-        show("No such option!");
+        view.show("No such option!");
     }
 
     public void showUserInstructions() {
-        show("""
-                1. Login Form
-                2. Registration Form
-                3. Reset password Form""");
+        view.show("1. Login Form\n" +
+                "2. Registration Form\n" +
+                "3. Reset password Form");
     }
 }

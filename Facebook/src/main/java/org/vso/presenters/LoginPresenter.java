@@ -1,16 +1,18 @@
 package org.vso.presenters;
 
 import org.vso.constants.LoginStatus;
-import org.vso.constants.RegistrationStatus;
 import org.vso.domain.AuthenticationService;
 import org.vso.dto.UserLoginDTO;
 import org.vso.utils.EmailValidator;
 import org.vso.views.LoginView;
 import org.vso.views.RegistrationView;
+import org.vso.views.View;
 
 public class LoginPresenter {
 
     private final LoginView loginView;
+
+    private View view;
 
     private RegistrationView registrationView;
 
@@ -20,6 +22,7 @@ public class LoginPresenter {
 
     public LoginPresenter(LoginView loginView) {
         this.loginView = loginView;
+        this.view = new View();
         this.authenticationService = new AuthenticationService();
         this.emailValidator = new EmailValidator();
         this.registrationView = null;
@@ -28,12 +31,12 @@ public class LoginPresenter {
     public void onViewShown() {
         while (true) {
             loginView.showUserInstructions();
-            int userOption = loginView.getUserDecimalInput();
+            int userOption = view.getUserDecimalInput();
             switch (userOption) {
-                case 1 -> runLoginProcess();
-                case 2 -> runRegistrationProcess();
-                case 3 -> runResetPasswordProcess();
-                default -> loginView.showOptionError();
+                case 1 : runLoginProcess();break;
+                case 2 : runRegistrationProcess();break;
+                case 3 : runResetPasswordProcess();break;
+                default : loginView.showOptionError();break;
             }
         }
     }
@@ -68,15 +71,15 @@ public class LoginPresenter {
 
     private String getUserPassword() {
         loginView.askUserForPasswordInput();
-        return loginView.getUserTextInput();
+        return view.getUserTextInput();
     }
 
     private String getUserEmail() {
         loginView.askUserForEmailInput();
-        String userEmail = loginView.getUserTextInput();
+        String userEmail = view.getUserTextInput();
         while (!emailValidator.isValidEmail(userEmail)) {
             loginView.askUserForValidEmailInput();
-            userEmail = loginView.getUserTextInput();
+            userEmail = view.getUserTextInput();
         }
 
         return userEmail;

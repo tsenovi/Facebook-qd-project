@@ -2,11 +2,11 @@ package org.vso.dto;
 
 public class UserRegistrationDTO {
 
-    private String email;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private Integer age;
+    private final String email;
+    private final String password;
+    private final String firstName;
+    private final String lastName;
+    private final Integer age;
 
     public UserRegistrationDTO(String email, String password, String firstName, String lastName, Integer age) {
         this.email = email;
