@@ -29,6 +29,7 @@ public class LoginPresenterImpl implements BasePresenter {
     private final EmailValidator emailValidator;
 
     public LoginPresenterImpl(LoginView loginView) {
+        this.view = new View();
         this.loginView = loginView;
         this.authenticationService = AuthenticationServiceImpl.getInstance();
         this.emailValidator = new EmailValidatorImpl();

@@ -48,6 +48,21 @@ public class UserDaoImpl implements UserDao<User> {
         entityManager.close();
     }
 
+    public User getByName(String name){
+        EntityManager entityManager = getEntityManagerInTransaction();
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        Root<User> root = criteria.from(User.class);
+        criteria.select(root);
+        criteria.where(builder.equal(root.get(User_.FIRST_NAME), name));
+        User user = entityManager.createQuery(criteria).getResultList().stream().findFirst().orElse(null);
+
+        closeEntityManagerInTransaction(entityManager);
+
+        return user;
+    }
+
     @Override
     public User getByEmail(String email) {
         EntityManager entityManager = getEntityManagerInTransaction();

@@ -8,11 +8,12 @@ import org.vso.views.contracts.ProfileView;
 public class ProfilePresenterImpl implements BasePresenter {
 
     private final ProfileView profileView;
-
+    private final FriendRequestImpl friendRequest;
     private final AuthenticationService authenticationService;
 
     public ProfilePresenterImpl(ProfileView profileView) {
         this.profileView = profileView;
+        this.friendRequest = new FriendRequestImpl();
         this.authenticationService = AuthenticationServiceImpl.getInstance();
     }
 
@@ -23,6 +24,7 @@ public class ProfilePresenterImpl implements BasePresenter {
             int userOption = profileView.getUserDecimalInput();
             switch (userOption) {
                 case 1 : runLogoutProcess();break;
+                case 2 : friendRequest.onViewShown();break;
                 default : profileView.showOptionError();break;
             }
         }
