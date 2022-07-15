@@ -18,7 +18,7 @@ public class LoginPresenterImpl implements BasePresenter {
 
     private final LoginView loginView;
 
-    private View view;
+    private final View view;
 
     private RegistrationView registrationView;
 

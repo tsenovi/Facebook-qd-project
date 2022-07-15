@@ -24,7 +24,8 @@ public class ProfilePresenterImpl implements BasePresenter {
             int userOption = profileView.getUserDecimalInput();
             switch (userOption) {
                 case 1 : runLogoutProcess();break;
-                case 2 : friendRequest.onViewShown();break;
+                case 2 : friendRequest.search();break;
+                case 3 : friendRequest.sendFriendRequest();break;
                 default : profileView.showOptionError();break;
             }
         }

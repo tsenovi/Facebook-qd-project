@@ -10,7 +10,6 @@ import org.vso.models.services.contracts.AuthenticationService;
 import org.vso.models.dto.UserLoginDTO;
 import org.vso.models.dto.UserRegistrationDTO;
 
-import java.util.Optional;
 
 public class AuthenticationServiceImpl implements AuthenticationService {
 
@@ -18,7 +17,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserDao<User> userDao;
     private User loggedUser;
 
-    private AuthenticationServiceImpl() {
+    public AuthenticationServiceImpl() {
         this.userDao = new UserDaoImpl();
         this.loggedUser = null;
     }

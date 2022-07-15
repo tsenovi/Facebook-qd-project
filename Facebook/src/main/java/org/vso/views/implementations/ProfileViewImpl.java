@@ -37,7 +37,8 @@ public class ProfileViewImpl implements ProfileView {
     public void showProfileOptions() {
         show("\\tProfile Options\n" +
                 "1. Logout\n" +
-                "2. Search");
+                "2. Search\n" +
+                "3. Sent a friend request");
     }
 
     @Override

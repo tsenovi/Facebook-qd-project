@@ -8,6 +8,7 @@ import jakarta.persistence.criteria.CriteriaDelete;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.vso.models.dao.contracts.UserDao;
+import org.vso.models.data.FriendRequest;
 import org.vso.models.data.User;
 import org.vso.models.data.User_;
 import org.vso.utils.contracts.Hibernate;
@@ -116,6 +117,13 @@ public class UserDaoImpl implements UserDao<User> {
     public void save(User user) {
         EntityManager entityManager = getEntityManagerInTransaction();
         entityManager.persist(user);
+
+        closeEntityManagerInTransaction(entityManager);
+    }
+
+    public void save(FriendRequest friendRequests) {
+        EntityManager entityManager = getEntityManagerInTransaction();
+        entityManager.persist(friendRequests);
 
         closeEntityManagerInTransaction(entityManager);
     }
