@@ -2,6 +2,8 @@ package org.vso.models.data;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -23,6 +25,9 @@ public class User {
 
     @Column(nullable = false)
     private int age;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
+    private List<Post> posts;
 
     protected User() {
     }
@@ -81,6 +86,14 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void addPosts(Post post) {
+        this.posts.add(post);
     }
 
     @Override
