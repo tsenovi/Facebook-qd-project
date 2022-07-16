@@ -43,10 +43,6 @@ public class FriendRequestImpl{
         User searchedUser = search();
         FriendRequest friendRequest = new FriendRequest(authenticationService.getLoggedUser().getId(),
                 searchedUser.getId(), FriendStatus.SENT);
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("FriendRequest");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(friendRequest);
-        entityManager.getTransaction().commit();
+            allUsers.save(friendRequest);
     }
 }
