@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="960d591b-86fa-4e2a-8e15-297fb8abef71" name="Changes" comment="create Post class">
-      <change afterPath="$PROJECT_DIR$/Facebook/src/main/java/org/vso/models/data/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Facebook/src/main/java/org/vso/models/data/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Facebook/src/main/java/org/vso/models/data/User.java" afterDir="false" />
-    </list>
+    <list default="true" id="960d591b-86fa-4e2a-8e15-297fb8abef71" name="Changes" comment="fixed LocalDateTime variable" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,19 +93,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="Facebook" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="Facebook" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
@@ -124,6 +108,14 @@
       <option name="presentableId" value="Default" />
       <updated>1656441661625</updated>
     </task>
+    <task id="LOCAL-00001" summary="fixed LocalDateTime variable">
+      <created>1657986946706</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1657986946706</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -156,6 +148,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create Post class" />
-    <option name="LAST_COMMIT_MESSAGE" value="create Post class" />
+    <MESSAGE value="fixed LocalDateTime variable" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed LocalDateTime variable" />
   </component>
 </project>

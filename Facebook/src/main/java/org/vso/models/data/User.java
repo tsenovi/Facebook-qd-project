@@ -25,8 +25,6 @@ public class User {
 
     @Column(nullable = false)
     private int age;
-    @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
-    private List<Post> posts;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
     private List<Post> posts;
