@@ -9,11 +9,13 @@ public class ProfilePresenterImpl implements BasePresenter {
 
     private final ProfileView profileView;
     private final FriendRequestImpl friendRequest;
+    private final SearchPresenterImpl searchPresenter;
     private final AuthenticationService authenticationService;
 
     public ProfilePresenterImpl(ProfileView profileView) {
         this.profileView = profileView;
         this.friendRequest = new FriendRequestImpl();
+        this.searchPresenter = new SearchPresenterImpl();
         this.authenticationService = AuthenticationServiceImpl.getInstance();
     }
 
@@ -24,8 +26,8 @@ public class ProfilePresenterImpl implements BasePresenter {
             int userOption = profileView.getUserDecimalInput();
             switch (userOption) {
                 case 1 : runLogoutProcess();break;
-                case 2 : friendRequest.search();break;
-                case 3 : friendRequest.sendFriendRequest();break;
+                case 2 : searchPresenter.onViewShown();break;
+                case 3 : friendRequest.onViewShown();break;
                 default : profileView.showOptionError();break;
             }
         }

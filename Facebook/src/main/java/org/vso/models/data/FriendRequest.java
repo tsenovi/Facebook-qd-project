@@ -45,4 +45,20 @@ public class FriendRequest {
     public FriendStatus getFriendStatus() {
         return friendStatus;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setFriendId(Long friendId) {
+        this.friendId = friendId;
+    }
+
+    public void setFriendStatus(FriendStatus friendStatus) {
+        this.friendStatus = friendStatus;
+    }
 }
