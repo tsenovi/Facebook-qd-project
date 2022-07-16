@@ -7,13 +7,14 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "posts")
 public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = false, length = 45)
     private String content;
     @Basic
-    private java.time.LocalDateTime dateTime;
+    private LocalDateTime dateTime;
     @ManyToOne(optional = false,cascade = CascadeType.PERSIST)
     @JoinColumn(name = "USER_ID",referencedColumnName = "ID")
     private User author;

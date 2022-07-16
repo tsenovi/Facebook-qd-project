@@ -28,6 +28,9 @@ public class User {
     @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
     private List<Post> posts;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
+    private List<Post> posts;
+
     protected User() {
     }
 
