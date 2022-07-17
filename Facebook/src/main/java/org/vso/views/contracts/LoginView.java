@@ -1,25 +1,11 @@
 package org.vso.views.contracts;
 
+import org.vso.presenters.implementations.LoginPresenterImpl;
+
 public interface LoginView {
-    void show(String text);
-
-    String getUserTextInput();
-
-    Integer getUserDecimalInput();
-
-    void showLoginInstructions();
-
-    void askUserForEmailInput();
-
-    void askUserForValidEmailInput();
-
-    void askUserForPasswordInput();
+    void getUserLoginInfo(LoginPresenterImpl.UserLoginListener listener);
 
     void showLoginSuccessful();
 
-    void showLoginError();
-
-    void showOptionError();
-
-    void showUserInstructions();
+    void showLoginFailed();
 }

@@ -29,7 +29,6 @@ public class LaunchPage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (loginButton.equals(source)) {
-            //TODO
             navigateToLoginPage();
         } else if (registrationButton.equals(source)) {
             //TODO
