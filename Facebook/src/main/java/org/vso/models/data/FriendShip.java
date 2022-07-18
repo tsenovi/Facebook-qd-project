@@ -17,6 +17,7 @@ public class FriendRequest {
     @Column
     private Long friendId;
 
+    @Enumerated(EnumType.STRING)
     @Column
     private FriendStatus friendStatus;
 
