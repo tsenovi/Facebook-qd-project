@@ -35,10 +35,15 @@ public class LoginPresenterImpl implements LoginPresenter {
         LoginStatus loginStatus = authenticationService.login(userLoginDTO);
         if (loginStatus == LoginStatus.LOGIN_SUCCESSFUL) {
             loginView.showLoginSuccessful();
-            this.profileView = new ProfileViewImpl();
+            navigateToProfilePage();
         } else {
             loginView.showLoginFailed();
         }
+    }
+
+    private void navigateToProfilePage() {
+        loginView.hideLoginPage();
+        this.profileView = new ProfileViewImpl();
     }
 
     public interface UserLoginListener {

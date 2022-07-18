@@ -8,4 +8,8 @@ public interface LoginView {
     void showLoginSuccessful();
 
     void showLoginFailed();
+
+    void hideLoginPage();
+
+    void showLoginPage();
 }

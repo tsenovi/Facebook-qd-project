@@ -1,5 +1,6 @@
 package org.vso.views.implementations;
 
+import org.vso.constants.ComponentText;
 import org.vso.constants.ImagePathHolder;
 import org.vso.constants.LoginStatus;
 import org.vso.presenters.contracts.LoginPresenter;
@@ -17,23 +18,26 @@ import java.awt.event.ActionListener;
 
 public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
 
+    private static LoginViewImpl instance;
     private final JLabel errorMsg;
     private final JLabel emailLabel;
     private final JTextField emailField;
     private final JLabel passwordLabel;
     private final JPasswordField passwordField;
-    private final JButton loginPageButton;
+    private final JButton loginButton;
+    private final JButton resetPasswordButton;
     private final JButton returnButton;
     private final LoginPresenter loginPresenter;
     private final EmailValidator emailValidator;
 
-    public LoginViewImpl() {
+    private LoginViewImpl() {
         this.errorMsg = new JLabel();
         this.emailLabel = new JLabel();
         this.emailField = new JTextField();
         this.passwordLabel = new JLabel();
         this.passwordField = new JPasswordField();
-        this.loginPageButton = new JButton();
+        this.loginButton = new JButton();
+        this.resetPasswordButton = new JButton();
         this.returnButton = new JButton();
 
         this.emailValidator = new EmailValidatorImpl();
@@ -42,11 +46,18 @@ public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
         setupComponents();
     }
 
+    public static LoginViewImpl getInstance() {
+        if(instance == null) instance = new LoginViewImpl();
+        return instance;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if (loginPageButton.equals(source)) {
+        if (loginButton.equals(source)) {
             loginPresenter.onLoginButtonClicked();
+        } else if (resetPasswordButton.equals(source)) {
+            //TODO - redirect to forgotten password page!
         } else if (returnButton.equals(source)) {
             returnToLaunchPage();
         }
@@ -61,25 +72,35 @@ public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
 
     @Override
     public void showLoginSuccessful() {
-        showMessage(String.valueOf(LoginStatus.LOGIN_SUCCESSFUL));
+        showMessage(LoginStatus.LOGIN_SUCCESSFUL.getText());
     }
 
     @Override
     public void showLoginFailed() {
-        showMessage(String.valueOf(LoginStatus.LOGIN_FAILED));
+        showMessage(LoginStatus.LOGIN_FAILED.getText());
+    }
+
+    @Override
+    public void hideLoginPage() {
+        this.dispose();
+    }
+
+    @Override
+    public void showLoginPage() {
+        this.setVisible(true);
+    }
+
+    private void returnToLaunchPage() {
+        this.dispose();
+        LaunchPage.getInstance().setVisible(true);
     }
 
     private void showMessage(String message) {
         JOptionPane.showMessageDialog(
                 null,
                 message,
-                String.valueOf(LoginStatus.LOGIN_STATUS),
+                LoginStatus.LOGIN_STATUS.getText(),
                 JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    private void returnToLaunchPage() {
-        this.dispose();
-        LaunchPage.getInstance().setVisible(true);
     }
 
     private void setupComponents() {
@@ -89,6 +110,7 @@ public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
         setupPasswordLabel();
         setupPasswordField();
         setupLoginButton();
+        setupResetPasswordButton();
         setupReturnButton();
         setupFrame();
     }
@@ -99,12 +121,13 @@ public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
         this.add(emailField);
         this.add(passwordLabel);
         this.add(passwordField);
-        this.add(loginPageButton);
+        this.add(loginButton);
+        this.add(resetPasswordButton);
         this.add(returnButton);
 
         ImageIcon icon = new ImageIcon(ImagePathHolder.FRAME_ICON);
         this.setIconImage(icon.getImage());
-        this.setTitle("Facebook Login Page");
+        this.setTitle(ComponentText.LOGIN.getText());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBounds(550, 200, 420, 420);
         this.setResizable(false);
@@ -113,30 +136,37 @@ public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
     }
 
     private void setupReturnButton() {
-        returnButton.setText("Go Back");
+        returnButton.setText(ComponentText.RETURN.getText());
         returnButton.setBounds(50, 320, 300, 40);
         returnButton.setFocusable(false);
         returnButton.addActionListener(this);
     }
 
+    private void setupResetPasswordButton() {
+        resetPasswordButton.setText(ComponentText.FORGOT_PASSWORD.getText());
+        resetPasswordButton.setBounds(50, 260, 300, 40);
+        resetPasswordButton.setFocusable(false);
+        resetPasswordButton.addActionListener(this);
+    }
+
     private void setupLoginButton() {
-        loginPageButton.setText("Login");
-        loginPageButton.setBounds(50, 240, 300, 40);
-        loginPageButton.setFocusable(false);
-        loginPageButton.addActionListener(this);
+        loginButton.setText(ComponentText.LOGIN.getText());
+        loginButton.setBounds(50, 200, 300, 40);
+        loginButton.setFocusable(false);
+        loginButton.addActionListener(this);
     }
 
     private void setupPasswordField() {
-        passwordField.setBounds(150, 160, 200, 40);
+        passwordField.setBounds(150, 120, 200, 40);
     }
 
     private void setupPasswordLabel() {
-        passwordLabel.setText("Password: ");
-        passwordLabel.setBounds(50, 160, 80, 40);
+        passwordLabel.setText(ComponentText.PASSWORD.getText());
+        passwordLabel.setBounds(50, 120, 80, 40);
     }
 
     private void setupEmailField() {
-        emailField.setBounds(150, 80, 200, 40);
+        emailField.setBounds(150, 60, 200, 40);
         emailField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void removeUpdate(DocumentEvent e) {
@@ -156,14 +186,14 @@ public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
     }
 
     private void setupEmailLabel() {
-        emailLabel.setText("Email: ");
-        emailLabel.setBounds(50, 80, 80, 40);
+        emailLabel.setText(ComponentText.EMAIL.getText());
+        emailLabel.setBounds(50, 60, 80, 40);
     }
 
     private void setupErrorLabel() {
-        errorMsg.setText("Invalid email input!");
+        errorMsg.setText(ComponentText.INVALID_EMAIL_INPUT.getText());
         errorMsg.setForeground(this.getBackground());
-        errorMsg.setBounds(150, 25, 140, 40);
+        errorMsg.setBounds(150, 10, 140, 40);
     }
 
     private void validateInput() {
