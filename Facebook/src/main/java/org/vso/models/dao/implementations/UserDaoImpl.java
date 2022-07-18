@@ -8,7 +8,6 @@ import jakarta.persistence.criteria.CriteriaDelete;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.vso.models.dao.contracts.UserDao;
-import org.vso.models.data.FriendRequest;
 import org.vso.models.data.User;
 import org.vso.models.data.User_;
 import org.vso.utils.contracts.Hibernate;
@@ -47,21 +46,6 @@ public class UserDaoImpl implements UserDao<User> {
     private void closeEntityManagerInTransaction(EntityManager entityManager) {
         entityManager.getTransaction().commit();
         entityManager.close();
-    }
-
-    public User getByName(String name){
-        EntityManager entityManager = getEntityManagerInTransaction();
-
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<User> criteria = builder.createQuery(User.class);
-        Root<User> root = criteria.from(User.class);
-        criteria.select(root);
-        criteria.where(builder.equal(root.get(User_.FIRST_NAME), name));
-        User user = entityManager.createQuery(criteria).getResultList().stream().findFirst().orElse(null);
-
-        closeEntityManagerInTransaction(entityManager);
-
-        return user;
     }
 
     @Override
@@ -117,13 +101,6 @@ public class UserDaoImpl implements UserDao<User> {
     public void save(User user) {
         EntityManager entityManager = getEntityManagerInTransaction();
         entityManager.persist(user);
-
-        closeEntityManagerInTransaction(entityManager);
-    }
-
-    public void save(FriendRequest friendRequests) {
-        EntityManager entityManager = getEntityManagerInTransaction();
-        entityManager.persist(friendRequests);
 
         closeEntityManagerInTransaction(entityManager);
     }

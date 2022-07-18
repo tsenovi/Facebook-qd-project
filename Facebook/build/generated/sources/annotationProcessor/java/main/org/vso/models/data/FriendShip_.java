@@ -6,13 +6,13 @@ import javax.annotation.processing.Generated;
 import org.vso.constants.FriendStatus;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
-@StaticMetamodel(FriendRequest.class)
-public abstract class FriendRequest_ {
+@StaticMetamodel(FriendShip.class)
+public abstract class FriendShip_ {
 
-	public static volatile SingularAttribute<FriendRequest, FriendStatus> friendStatus;
-	public static volatile SingularAttribute<FriendRequest, Long> friendId;
-	public static volatile SingularAttribute<FriendRequest, Long> id;
-	public static volatile SingularAttribute<FriendRequest, Long> userId;
+	public static volatile SingularAttribute<FriendShip, FriendStatus> friendStatus;
+	public static volatile SingularAttribute<FriendShip, Long> friendId;
+	public static volatile SingularAttribute<FriendShip, Long> id;
+	public static volatile SingularAttribute<FriendShip, Long> userId;
 
 	public static final String FRIEND_STATUS = "friendStatus";
 	public static final String FRIEND_ID = "friendId";

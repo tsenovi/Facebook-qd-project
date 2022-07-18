@@ -8,13 +8,13 @@ import org.vso.views.contracts.ProfileView;
 public class ProfilePresenterImpl implements BasePresenter {
 
     private final ProfileView profileView;
-    private final FriendRequestImpl friendRequest;
+    private final FriendShipImpl friendRequest;
     private final SearchPresenterImpl searchPresenter;
     private final AuthenticationService authenticationService;
 
     public ProfilePresenterImpl(ProfileView profileView) {
         this.profileView = profileView;
-        this.friendRequest = new FriendRequestImpl();
+        this.friendRequest = new FriendShipImpl();
         this.searchPresenter = new SearchPresenterImpl();
         this.authenticationService = AuthenticationServiceImpl.getInstance();
     }

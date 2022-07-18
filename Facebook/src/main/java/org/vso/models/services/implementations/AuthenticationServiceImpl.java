@@ -75,6 +75,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private User mapUserDTOtoUser(UserRegistrationDTO userRegistrationDTO) {
         return new User(userRegistrationDTO.getEmail(), userRegistrationDTO.getPassword(),
-                userRegistrationDTO.getFirstName(), userRegistrationDTO.getLastName(), userRegistrationDTO.getAge());
+                userRegistrationDTO.getFirstName(), userRegistrationDTO.getLastName(),
+                userRegistrationDTO.getAge());
     }
 }

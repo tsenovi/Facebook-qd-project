@@ -5,7 +5,7 @@ import org.vso.constants.FriendStatus;
 
 @Entity
 @Table(name = "friendRequests")
-public class FriendRequest {
+public class FriendShip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,10 @@ public class FriendRequest {
     private FriendStatus friendStatus;
 
 
-    public FriendRequest() {
+    public FriendShip() {
     }
 
-    public FriendRequest(Long userId, Long friendId, FriendStatus friendStatus) {
+    public FriendShip(Long userId, Long friendId, FriendStatus friendStatus) {
         this.userId = userId;
         this.friendId = friendId;
         this.friendStatus = friendStatus;

@@ -11,13 +11,13 @@ import org.vso.models.services.implementations.AuthenticationServiceImpl;
 import org.vso.presenters.contracts.BasePresenter;
 import org.vso.views.View;
 
-public class FriendRequestImpl implements BasePresenter {
+public class FriendShipImpl implements BasePresenter {
     private final SearchPresenterImpl searchPresenter;
     private final FriendShipDao<FriendShip> friendShipDao;
     private final AuthenticationService authenticationService;
     private final View view;
 
-    public FriendRequestImpl() {
+    public FriendShipImpl() {
         this.searchPresenter = new SearchPresenterImpl();
         this.friendShipDao = new FriendShipDaoImpl();
         this.authenticationService = AuthenticationServiceImpl.getInstance();
@@ -32,11 +32,16 @@ public class FriendRequestImpl implements BasePresenter {
             friendShipDao.save(friendShip);
     }
 
+    public void acceptAFriendRequest(){
+
+    }
+
     @Override
     public void onViewShown() {
         view.show("Name:");
         String name = view.getUserTextInput();
-        sendFriendRequest(authenticationService.getLoggedUser(), searchPresenter.search(name));
+        User friend = searchPresenter.search(name);
+        sendFriendRequest(authenticationService.getLoggedUser(), friend);
         view.show("Sent");
     }
 }

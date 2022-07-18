@@ -1,5 +1,6 @@
 package org.vso.models.data;
 
+import jakarta.persistence.metamodel.ListAttribute;
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
 import javax.annotation.processing.Generated;
@@ -14,6 +15,7 @@ public abstract class User_ {
 	public static volatile SingularAttribute<User, Long> id;
 	public static volatile SingularAttribute<User, String> email;
 	public static volatile SingularAttribute<User, Integer> age;
+	public static volatile ListAttribute<User, FriendShip> friends;
 
 	public static final String FIRST_NAME = "firstName";
 	public static final String LAST_NAME = "lastName";
@@ -21,6 +23,7 @@ public abstract class User_ {
 	public static final String ID = "id";
 	public static final String EMAIL = "email";
 	public static final String AGE = "age";
+	public static final String FRIENDS = "friends";
 
 }
 

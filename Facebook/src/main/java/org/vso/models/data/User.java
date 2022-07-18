@@ -3,6 +3,7 @@ package org.vso.models.data;
 import jakarta.persistence.*;
 
 
+
 @Entity
 @Table(name = "users")
 public class User {
