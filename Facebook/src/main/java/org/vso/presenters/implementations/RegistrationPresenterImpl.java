@@ -5,14 +5,14 @@ import org.vso.constants.RegistrationStatus;
 import org.vso.models.services.contracts.AuthenticationService;
 import org.vso.models.services.implementations.AuthenticationServiceImpl;
 import org.vso.models.dto.UserRegistrationDTO;
-import org.vso.presenters.contracts.BasePresenter;
+import org.vso.presenters.contracts.RegistrationPresenter;
 import org.vso.utils.contracts.EmailValidator;
 import org.vso.utils.implementations.EmailValidatorImpl;
 import org.vso.views.contracts.ProfileView;
 import org.vso.views.implementations.ProfileViewImpl;
 import org.vso.views.contracts.RegistrationView;
 
-public class RegistrationPresenterImpl implements BasePresenter {
+public class RegistrationPresenterImpl implements RegistrationPresenter {
 
     private final RegistrationView registrationView;
 
@@ -30,74 +30,47 @@ public class RegistrationPresenterImpl implements BasePresenter {
     }
 
     @Override
-    public void onViewShown() {
-        registrationView.showRegistrationInstructions();
-        onInstructionsShown();
+    public void onRegistrationButtonClicked() {
+        registrationView.getUserRegistrationInfo((email, password, confirmedPassword, firstName, lastName, age) -> {
+            UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO(
+                    email, password, confirmedPassword, firstName, lastName, age);
+            onRegistrationInfoReceived(userRegistrationDTO);
+        });
     }
 
-    private void onInstructionsShown() {
-        UserRegistrationDTO userRegistrationInfo = getUserInfo();
-        RegistrationStatus registrationStatus = authenticationService.registerUser(userRegistrationInfo);
-        if (registrationStatus == RegistrationStatus.REGISTRATION_SUCCESSFUL) {
-            registrationView.showRegistrationSuccess();
-            this.profileView = new ProfileViewImpl();
+    private void onRegistrationInfoReceived(UserRegistrationDTO userRegistrationDTO) {
+        boolean isValidData = validateRegistrationData(userRegistrationDTO);
+        if (isValidData) {
+            RegistrationStatus registrationStatus = authenticationService.registerUser(userRegistrationDTO);
+            if (registrationStatus == RegistrationStatus.REGISTRATION_SUCCESSFUL) {
+                registrationView.showRegistrationSuccessful();
+                navigateToProfilePage();
+            } else {
+                registrationView.showUserExistsMsg();
+            }
         } else {
-            registrationView.showRegistrationError();
+            registrationView.showRegistrationFailed();
         }
     }
 
-    private UserRegistrationDTO getUserInfo() {
-        String userEmail = getUserEmail();
-        String userPassword = getUserPassword();
-        String userFirstName = getUserFirstName();
-        String userLastName = getUserLastName();
-        int userAge = getUserAge();
-
-        return new UserRegistrationDTO(userEmail, userPassword, userFirstName, userLastName, userAge);
+    private void navigateToProfilePage() {
+        registrationView.hideRegistrationPage();
+        this.profileView = new ProfileViewImpl();
     }
 
-    private int getUserAge() {
-        int userAge;
-        do {
-            registrationView.askUserForAgeInput();
-            userAge = registrationView.getUserDecimalInput();
-        } while (userAge < Participant.MIN_AGE);
-
-        return userAge;
+    private boolean validateRegistrationData(UserRegistrationDTO userRegistrationDTO) {
+        return userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmedPassword())
+                && userRegistrationDTO.getAge() >= Participant.MIN_AGE
+                && emailValidator.isValidEmail(userRegistrationDTO.getEmail());
     }
 
-    private String getUserLastName() {
-        registrationView.askUserForLastNameInput();
-
-        return registrationView.getUserTextInput();
-    }
-
-    private String getUserFirstName() {
-        registrationView.askUserForFirstNameInput();
-
-        return registrationView.getUserTextInput();
-    }
-
-    private String getUserPassword() {
-        String userPassword;
-        String userRepeatedPassword;
-        do {
-            registrationView.askUserForPasswordInput();
-            userPassword = registrationView.getUserTextInput();
-            registrationView.askUserForPasswordRepeatInput();
-            userRepeatedPassword = registrationView.getUserTextInput();
-        } while (!userPassword.equals(userRepeatedPassword));
-
-        return userPassword;
-    }
-
-    private String getUserEmail() {
-        String userEmail;
-        do {
-            registrationView.askUserForEmailInput();
-            userEmail = registrationView.getUserTextInput();
-        } while (!emailValidator.isValidEmail(userEmail));
-
-        return userEmail;
+    public interface UserRegistrationListener {
+        void onUserRegistrationDataEntered(
+                String email,
+                String password,
+                String confirmedPassword,
+                String firstName,
+                String lastName,
+                int age);
     }
 }
