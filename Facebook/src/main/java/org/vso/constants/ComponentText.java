@@ -1,14 +1,20 @@
 package org.vso.constants;
 
 public enum ComponentText {
+    APP_TITLE("Facebook"),
     LOGIN("Login"),
-    RETURN("return"),
-    FORGOT_PASSWORD("Forgot password?"),
-    PASSWORD("Password:"),
-    EMAIL("Email:"),
-    INVALID_EMAIL_INPUT("Invalid email input!"),
     REGISTER("Register"),
-    APP_TITLE("Facebook");
+    FORGOT_PASSWORD("Forgot password?"),
+    RETURN("Return"),
+    EMAIL("Email:"),
+    PASSWORD("Password:"),
+    CONFIRM_PASSWORD("Confirm password:"),
+    FIRST_NAME("First name:"),
+    LAST_NAME("Last name:"),
+    AGE("Age:"),
+    INVALID_EMAIL_INPUT("Invalid email input!"),
+    PASSWORDS_MUST_MATCH("Passwords must match!"),
+    AGE_REQUIREMENT("You must be over 14 to register!");
 
     private final String text;
 

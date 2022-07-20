@@ -1,27 +1,15 @@
 package org.vso.views.contracts;
 
+import org.vso.presenters.implementations.RegistrationPresenterImpl;
+
 public interface RegistrationView {
-    void show(String text);
+    void getUserRegistrationInfo(RegistrationPresenterImpl.UserRegistrationListener listener);
 
-    String getUserTextInput();
+    void showRegistrationSuccessful();
 
-    Integer getUserDecimalInput();
+    void showRegistrationFailed();
 
-    void showRegistrationInstructions();
+    void showUserExistsMsg();
 
-    void showRegistrationSuccess();
-
-    void showRegistrationError();
-
-    void askUserForEmailInput();
-
-    void askUserForPasswordInput();
-
-    void askUserForPasswordRepeatInput();
-
-    void askUserForFirstNameInput();
-
-    void askUserForLastNameInput();
-
-    void askUserForAgeInput();
+    void hideRegistrationPage();
 }
