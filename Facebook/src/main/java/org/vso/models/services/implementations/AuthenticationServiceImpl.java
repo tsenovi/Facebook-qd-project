@@ -8,8 +8,6 @@ import org.vso.models.data.User;
 import org.vso.models.services.contracts.AuthenticationService;
 import org.vso.models.dto.UserLoginDTO;
 import org.vso.models.dto.UserRegistrationDTO;
-
-
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private static AuthenticationService instance;

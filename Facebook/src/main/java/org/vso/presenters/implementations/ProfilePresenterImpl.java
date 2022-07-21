@@ -4,6 +4,7 @@ import org.vso.models.services.contracts.AuthenticationService;
 import org.vso.models.services.implementations.AuthenticationServiceImpl;
 import org.vso.presenters.contracts.BasePresenter;
 import org.vso.views.contracts.ProfileView;
+import org.vso.views.implementations.LoginViewImpl;
 
 public class ProfilePresenterImpl implements BasePresenter {
 
@@ -37,5 +38,10 @@ public class ProfilePresenterImpl implements BasePresenter {
     private void runLogoutProcess() {
         profileView.onUserLogoutSelected();
         authenticationService.onUserLogoutSelected();
+        navigateToLoginPage();
+    }
+
+    private void navigateToLoginPage() {
+        LoginViewImpl.getInstance().showLoginPage();
     }
 }
