@@ -10,14 +10,14 @@ import org.vso.constants.FriendStatus;
 public abstract class FriendShip_ {
 
 	public static volatile SingularAttribute<FriendShip, FriendStatus> friendStatus;
-	public static volatile SingularAttribute<FriendShip, Long> friendId;
-	public static volatile SingularAttribute<FriendShip, Long> id;
-	public static volatile SingularAttribute<FriendShip, Long> userId;
+	public static volatile SingularAttribute<FriendShip, User> receiver;
+	public static volatile SingularAttribute<FriendShip, User> sender;
+	public static volatile SingularAttribute<FriendShip, Integer> id;
 
 	public static final String FRIEND_STATUS = "friendStatus";
-	public static final String FRIEND_ID = "friendId";
+	public static final String RECEIVER = "receiver";
+	public static final String SENDER = "sender";
 	public static final String ID = "id";
-	public static final String USER_ID = "userId";
 
 }
 

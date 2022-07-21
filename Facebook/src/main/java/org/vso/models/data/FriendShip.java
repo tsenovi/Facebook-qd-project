@@ -9,57 +9,59 @@ public class FriendShip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column
-    private Long userId;
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "senderId", referencedColumnName = "ID")
+    private User sender;
 
-    @Column
-    private Long friendId;
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "receiverId", referencedColumnName = "ID")
+    private User receiver;
 
     @Enumerated(EnumType.STRING)
     @Column
     private FriendStatus friendStatus;
 
-
     public FriendShip() {
     }
 
-    public FriendShip(Long userId, Long friendId, FriendStatus friendStatus) {
-        this.userId = userId;
-        this.friendId = friendId;
+    public FriendShip(User sender, User friend, FriendStatus friendStatus) {
+        this.sender = sender;
+        this.receiver = friend;
         this.friendStatus = friendStatus;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getSender() {
+        return sender;
     }
 
-    public Long getFriendId() {
-        return friendId;
+    public User getReceiver() {
+        return receiver;
     }
 
     public FriendStatus getFriendStatus() {
         return friendStatus;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
-    public void setFriendId(Long friendId) {
-        this.friendId = friendId;
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
     public void setFriendStatus(FriendStatus friendStatus) {
         this.friendStatus = friendStatus;
     }
+
 }

@@ -28,6 +28,7 @@ public class ProfilePresenterImpl implements BasePresenter {
                 case 1 : runLogoutProcess();break;
                 case 2 : searchPresenter.onViewShown();break;
                 case 3 : friendRequest.onViewShown();break;
+                case 4 : friendRequest.friendRequestOptionsOfUser();break;
                 default : profileView.showOptionError();break;
             }
         }

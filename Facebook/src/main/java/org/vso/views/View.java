@@ -1,5 +1,4 @@
 package org.vso.views;
-
 import java.util.Scanner;
 
 public class View {

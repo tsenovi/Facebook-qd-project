@@ -38,7 +38,8 @@ public class ProfileViewImpl implements ProfileView {
         show("\\tProfile Options\n" +
                 "1. Logout\n" +
                 "2. Search\n" +
-                "3. Sent a friend request");
+                "3. Sent a friend request\n" +
+                "4. Your friend requests");
     }
 
     @Override

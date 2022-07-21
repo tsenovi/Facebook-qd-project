@@ -1,15 +1,13 @@
 package org.vso.models.data;
-
 import jakarta.persistence.*;
-
-
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false, unique = true, length = 45)
     private String email;
@@ -26,6 +24,21 @@ public class User {
     @Column(nullable = false)
     private int age;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
+    private List<Post> posts;
+
+    @OneToMany(targetEntity = FriendShip.class,
+            mappedBy = "receiver",
+            fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Integer.class)
+    private List<FriendShip> friendShips;
+
+    @OneToMany(targetEntity = FriendShip.class,
+            mappedBy = "receiver",
+            fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Integer.class)
+    private List<User> friends;
+
     protected User() {
     }
 
@@ -35,10 +48,9 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -64,6 +76,26 @@ public class User {
 
     public int getAge() {
         return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void addPosts(Post post) {
+        this.posts.add(post);
+    }
+
+    public List<FriendShip> getFriendShips() {
+        return friendShips;
+    }
+
+    public List<User> getFriends() {
+        return friends;
     }
 
     @Override
