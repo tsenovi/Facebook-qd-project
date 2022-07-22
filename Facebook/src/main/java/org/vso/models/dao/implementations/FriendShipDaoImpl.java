@@ -9,7 +9,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.vso.models.dao.contracts.FriendShipDao;
 import org.vso.models.data.FriendShip;
-import org.vso.models.data.FriendShipConstants;
+import org.vso.models.data.FriendShip_;
 import org.vso.utils.contracts.Hibernate;
 import org.vso.utils.implementations.HibernateImpl;
 
@@ -96,7 +96,7 @@ public class FriendShipDaoImpl implements FriendShipDao<FriendShip> {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaDelete<FriendShip> delete = builder.createCriteriaDelete(FriendShip.class);
         Root<FriendShip> root = delete.from(FriendShip.class);
-        delete.where(builder.lessThanOrEqualTo(root.get(FriendShipConstants.ID), friendShip.getId()));
+        delete.where(builder.lessThanOrEqualTo(root.get(FriendShip_.ID), friendShip.getId()));
 
         entityManager.createQuery(delete).executeUpdate();
 

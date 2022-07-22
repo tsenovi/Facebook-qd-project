@@ -9,7 +9,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.vso.models.dao.contracts.UserDao;
 import org.vso.models.data.User;
-import org.vso.models.data.UserConstants;
+import org.vso.models.data.User_;
 import org.vso.utils.contracts.Hibernate;
 import org.vso.utils.implementations.HibernateImpl;
 
@@ -56,7 +56,7 @@ public class UserDaoImpl implements UserDao<User> {
         CriteriaQuery<User> criteria = builder.createQuery(User.class);
         Root<User> root = criteria.from(User.class);
         criteria.select(root);
-        criteria.where(builder.equal(root.get(UserConstants.EMAIL), email));
+        criteria.where(builder.equal(root.get(User_.EMAIL), email));
         User user = entityManager.createQuery(criteria).getResultList().stream().findFirst().orElse(null);
 
         closeEntityManagerInTransaction(entityManager);
@@ -72,7 +72,7 @@ public class UserDaoImpl implements UserDao<User> {
         CriteriaQuery<User> criteria = builder.createQuery(User.class);
         Root<User> root = criteria.from(User.class);
         criteria.select(root);
-        criteria.where(builder.equal(root.get(UserConstants.ID), id));
+        criteria.where(builder.equal(root.get(User_.ID), id));
 
         Optional<User> singleResult = Optional.ofNullable(entityManager.createQuery(criteria).getSingleResult());
 
@@ -118,7 +118,7 @@ public class UserDaoImpl implements UserDao<User> {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaDelete<User> delete = builder.createCriteriaDelete(User.class);
         Root<User> root = delete.from(User.class);
-        delete.where(builder.lessThanOrEqualTo(root.get(UserConstants.ID), id));
+        delete.where(builder.lessThanOrEqualTo(root.get(User_.ID), id));
 
         entityManager.createQuery(delete).executeUpdate();
 
