@@ -7,7 +7,7 @@ import org.vso.constants.FriendStatus;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(FriendShip.class)
-public abstract class FriendShip_ {
+public abstract class FriendShipConstants {
 
 	public static volatile SingularAttribute<FriendShip, FriendStatus> friendStatus;
 	public static volatile SingularAttribute<FriendShip, User> receiver;
