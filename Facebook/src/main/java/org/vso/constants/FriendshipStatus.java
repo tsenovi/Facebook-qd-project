@@ -1,5 +1,5 @@
 package org.vso.constants;
 
-public enum FriendStatus {
+public enum FriendshipStatus {
     SENT, ACCEPTED, DECLINED
 }

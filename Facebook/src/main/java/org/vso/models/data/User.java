@@ -7,7 +7,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, unique = true, length = 45)
     private String email;
@@ -27,13 +27,13 @@ public class User {
     @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
     private List<Post> posts;
 
-    @OneToMany(targetEntity = FriendShip.class,
+    @OneToMany(targetEntity = Friendship.class,
             mappedBy = "receiver",
             fetch = FetchType.EAGER)
     @ElementCollection(targetClass = Integer.class)
-    private List<FriendShip> friendShips;
+    private List<Friendship> friendShips;
 
-    @OneToMany(targetEntity = FriendShip.class,
+    @OneToMany(targetEntity = Friendship.class,
             mappedBy = "receiver",
             fetch = FetchType.EAGER)
     @ElementCollection(targetClass = Integer.class)
@@ -50,7 +50,7 @@ public class User {
         this.age = age;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -90,13 +90,15 @@ public class User {
         this.posts.add(post);
     }
 
-    public List<FriendShip> getFriendShips() {
+    public List<Friendship> getFriendShips() {
         return friendShips;
     }
 
     public List<User> getFriends() {
         return friends;
     }
+
+    public void addFriend(User friend){this.getFriends().add(friend);}
 
     @Override
     public String toString() {

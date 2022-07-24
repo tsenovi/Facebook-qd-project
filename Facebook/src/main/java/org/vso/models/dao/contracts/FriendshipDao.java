@@ -2,7 +2,7 @@ package org.vso.models.dao.contracts;
 
 import java.util.List;
 
-public interface FriendShipDao<T> extends BaseDao<T> {
+public interface FriendshipDao<T> extends BaseDao<T> {
 
     @Override
     void save(T t);

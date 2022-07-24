@@ -1,38 +1,38 @@
 package org.vso.models.data;
 
 import jakarta.persistence.*;
-import org.vso.constants.FriendStatus;
+import org.vso.constants.FriendshipStatus;
 
 @Entity
-@Table(name = "friendRequests")
-public class FriendShip {
+@Table(name = "friendships")
+public class Friendship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "senderId", referencedColumnName = "ID")
+    @JoinColumn(name = "sender_id", referencedColumnName = "ID")
     private User sender;
 
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "receiverId", referencedColumnName = "ID")
+    @JoinColumn(name = "receiver_id", referencedColumnName = "ID")
     private User receiver;
 
     @Enumerated(EnumType.STRING)
     @Column
-    private FriendStatus friendStatus;
+    private FriendshipStatus friendshipStatus;
 
-    public FriendShip() {
+    public Friendship() {
     }
 
-    public FriendShip(User sender, User friend, FriendStatus friendStatus) {
+    public Friendship(User sender, User friend, FriendshipStatus friendStatus) {
         this.sender = sender;
         this.receiver = friend;
-        this.friendStatus = friendStatus;
+        this.friendshipStatus = friendStatus;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -44,11 +44,11 @@ public class FriendShip {
         return receiver;
     }
 
-    public FriendStatus getFriendStatus() {
-        return friendStatus;
+    public FriendshipStatus getFriendshipStatus() {
+        return friendshipStatus;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -60,8 +60,8 @@ public class FriendShip {
         this.receiver = receiver;
     }
 
-    public void setFriendStatus(FriendStatus friendStatus) {
-        this.friendStatus = friendStatus;
+    public void setFriendshipStatus(FriendshipStatus friendshipStatus) {
+        this.friendshipStatus = friendshipStatus;
     }
 
 }

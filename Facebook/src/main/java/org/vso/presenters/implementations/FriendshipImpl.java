@@ -1,39 +1,42 @@
 package org.vso.presenters.implementations;
 
-import org.vso.constants.FriendStatus;
-import org.vso.models.dao.contracts.FriendShipDao;
-import org.vso.models.dao.implementations.FriendShipDaoImpl;
-import org.vso.models.data.FriendShip;
+import org.vso.constants.FriendshipStatus;
+import org.vso.models.data.Friendship;
 import org.vso.models.data.User;
+import org.vso.models.dto.FriendshipDTO;
 import org.vso.models.services.contracts.AuthenticationService;
+import org.vso.models.services.contracts.FriendshipService;
 import org.vso.models.services.implementations.AuthenticationServiceImpl;
+import org.vso.models.services.implementations.FriendshipServiceImpl;
 import org.vso.presenters.contracts.BasePresenter;
 import org.vso.views.View;
-import org.vso.views.contracts.FriendShipView;
-import org.vso.views.implementations.FriendShipViewImpl;
+import org.vso.views.contracts.FriendshipView;
+import org.vso.views.implementations.FriendshipViewImpl;
 
-public class FriendShipImpl implements BasePresenter {
+public class FriendshipImpl implements BasePresenter {
     private final SearchPresenterImpl searchPresenter;
-    private final FriendShipDao<FriendShip> friendShipDao;
+    private final FriendshipService friendshipService;
     private final AuthenticationService authenticationService;
     private final View view;
-    private final FriendShipView friendShipView;
+    private final FriendshipView friendShipView;
+    private final FriendshipDTO friendshipDTO;
 
-    public FriendShipImpl() {
+    public FriendshipImpl() {
         this.searchPresenter = new SearchPresenterImpl();
-        this.friendShipDao = new FriendShipDaoImpl();
+        this.friendshipService = new FriendshipServiceImpl();
         this.authenticationService = AuthenticationServiceImpl.getInstance();
         this.view = new View();
-        this.friendShipView = new FriendShipViewImpl();
+        this.friendShipView = new FriendshipViewImpl();
+        this.friendshipDTO = new FriendshipDTO();
     }
 
     public void sendFriendRequest(User sender, User requester) {
-        FriendShip friendShip = new FriendShip();
+        Friendship friendShip = new Friendship();
         friendShip.setSender(sender);
         friendShip.setReceiver(requester);
-        friendShip.setFriendStatus(FriendStatus.SENT);
+        friendShip.setFriendshipStatus(FriendshipStatus.SENT);
         requester.getFriendShips().add(friendShip);
-        friendShipDao.save(friendShip);
+        friendshipService.save(friendShip);
     }
 
     public void friendRequestOptionsOfUser(){
@@ -48,23 +51,23 @@ public class FriendShipImpl implements BasePresenter {
         }
     }
 
-    private void declinedFriendRequest(FriendShip friendRequest) {
-        authenticationService.getLoggedUser().getFriendShips().remove(friendRequest);
-        FriendShip friendShip = new FriendShip(friendRequest.getSender(),
+    private void declinedFriendRequest(Friendship friendRequest) {
+        friendshipDTO.removeFriendShipOfTheLoggedUser(friendRequest);
+        Friendship friendship = new Friendship(friendRequest.getSender(),
                 friendRequest.getReceiver(),
-                FriendStatus.DECLINED);
-        friendShipDao.save(friendShip);
+                FriendshipStatus.DECLINED);
+        friendshipService.save(friendship);
         friendShipView.showDeclined();
     }
 
-    private void acceptFriendRequest(FriendShip friendRequest) {
-        authenticationService.getLoggedUser().getFriends().add(friendRequest.getSender());
-        friendRequest.getSender().getFriends().add(authenticationService.getLoggedUser());
-        authenticationService.getLoggedUser().getFriendShips().remove(friendRequest);
-        FriendShip friendShip = new FriendShip(friendRequest.getSender(),
+    private void acceptFriendRequest(Friendship friendRequest) {
+        authenticationService.getLoggedUser().addFriend(friendRequest.getSender());
+        friendRequest.getSender().addFriend(authenticationService.getLoggedUser());
+        friendshipDTO.removeFriendShipOfTheLoggedUser(friendRequest);
+        Friendship friendship = new Friendship(friendRequest.getSender(),
                 friendRequest.getReceiver(),
-                FriendStatus.ACCEPTED);
-        friendShipDao.save(friendShip);
+                FriendshipStatus.ACCEPTED);
+        friendshipService.save(friendship);
         friendShipView.showAccepted();
     }
 

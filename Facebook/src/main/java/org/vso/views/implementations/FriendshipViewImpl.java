@@ -3,13 +3,13 @@ package org.vso.views.implementations;
 import org.vso.models.services.contracts.AuthenticationService;
 import org.vso.models.services.implementations.AuthenticationServiceImpl;
 import org.vso.views.View;
-import org.vso.views.contracts.FriendShipView;
+import org.vso.views.contracts.FriendshipView;
 
-public class FriendShipViewImpl implements FriendShipView {
+public class FriendshipViewImpl implements FriendshipView {
     private final AuthenticationService authenticationService;
     private final View view;
 
-    public FriendShipViewImpl() {
+    public FriendshipViewImpl() {
         this.authenticationService = AuthenticationServiceImpl.getInstance();
         this.view = new View();
     }

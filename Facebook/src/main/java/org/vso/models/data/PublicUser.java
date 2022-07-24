@@ -2,13 +2,13 @@ package org.vso.models.data;
 
 public class PublicUser {
 
-    private final Integer id;
+    private final Long id;
 
     public PublicUser(User loggedUser) {
         this.id = loggedUser.getId();
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 }

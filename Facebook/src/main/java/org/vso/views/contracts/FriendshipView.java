@@ -1,6 +1,6 @@
 package org.vso.views.contracts;
 
-public interface FriendShipView {
+public interface FriendshipView {
 
     void showAllFriendRequestsOfAUser();
 

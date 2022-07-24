@@ -7,16 +7,16 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaDelete;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
-import org.vso.models.dao.contracts.FriendShipDao;
-import org.vso.models.data.FriendShip;
-import org.vso.models.data.FriendShip_;
+import org.vso.models.dao.contracts.FriendshipDao;
+import org.vso.models.data.Friendship;
+import org.vso.models.data.Friendship_;
 import org.vso.utils.contracts.Hibernate;
 import org.vso.utils.implementations.HibernateImpl;
 
 import java.util.List;
 import java.util.Optional;
 
-public class FriendShipDaoImpl implements FriendShipDao<FriendShip> {
+public class FriendshipDaoImpl implements FriendshipDao<Friendship> {
 
     @PersistenceUnit(name = "Facebook")
     private EntityManagerFactory entityManagerFactory;
@@ -24,7 +24,7 @@ public class FriendShipDaoImpl implements FriendShipDao<FriendShip> {
     private final Hibernate hibernate;
 
 
-    public FriendShipDaoImpl() {
+    public FriendshipDaoImpl() {
         this.hibernate = new HibernateImpl();
         init();
     }
@@ -51,20 +51,20 @@ public class FriendShipDaoImpl implements FriendShipDao<FriendShip> {
 
 
     @Override
-    public Optional<FriendShip> get(long id) {
+    public Optional<Friendship> get(long id) {
         return Optional.empty();
     }
 
     @Override
-    public List<FriendShip> getAll() {
+    public List<Friendship> getAll() {
         EntityManager entityManager = getEntityManagerInTransaction();
 
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FriendShip> criteria = builder.createQuery(FriendShip.class);
-        Root<FriendShip> root = criteria.from(FriendShip.class);
+        CriteriaQuery<Friendship> criteria = builder.createQuery(Friendship.class);
+        Root<Friendship> root = criteria.from(Friendship.class);
         criteria.select(root);
 
-        List<FriendShip> resultList = entityManager.createQuery(criteria).getResultList();
+        List<Friendship> resultList = entityManager.createQuery(criteria).getResultList();
 
         closeEntityManagerInTransaction(entityManager);
 
@@ -72,7 +72,7 @@ public class FriendShipDaoImpl implements FriendShipDao<FriendShip> {
     }
 
     @Override
-    public void save(FriendShip friendRequest) {
+    public void save(Friendship friendRequest) {
         EntityManager entityManager = getEntityManagerInTransaction();
         entityManager.persist(friendRequest);
 
@@ -80,7 +80,7 @@ public class FriendShipDaoImpl implements FriendShipDao<FriendShip> {
     }
 
     @Override
-    public void update(FriendShip friendRequest, String[] params) {
+    public void update(Friendship friendRequest, String[] params) {
 
     }
 
@@ -90,13 +90,13 @@ public class FriendShipDaoImpl implements FriendShipDao<FriendShip> {
     }
 
     @Override
-    public void delete(FriendShip friendShip) {
+    public void delete(Friendship friendship) {
         EntityManager entityManager = getEntityManagerInTransaction();
 
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaDelete<FriendShip> delete = builder.createCriteriaDelete(FriendShip.class);
-        Root<FriendShip> root = delete.from(FriendShip.class);
-        delete.where(builder.lessThanOrEqualTo(root.get(FriendShip_.ID), friendShip.getId()));
+        CriteriaDelete<Friendship> delete = builder.createCriteriaDelete(Friendship.class);
+        Root<Friendship> root = delete.from(Friendship.class);
+        delete.where(builder.lessThanOrEqualTo(root.get(Friendship_.ID), friendship.getId()));
 
         entityManager.createQuery(delete).executeUpdate();
 

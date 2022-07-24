@@ -9,13 +9,13 @@ import org.vso.views.implementations.LoginViewImpl;
 public class ProfilePresenterImpl implements BasePresenter {
 
     private final ProfileView profileView;
-    private final FriendShipImpl friendRequest;
+    private final FriendshipImpl friendRequest;
     private final SearchPresenterImpl searchPresenter;
     private final AuthenticationService authenticationService;
 
     public ProfilePresenterImpl(ProfileView profileView) {
         this.profileView = profileView;
-        this.friendRequest = new FriendShipImpl();
+        this.friendRequest = new FriendshipImpl();
         this.searchPresenter = new SearchPresenterImpl();
         this.authenticationService = AuthenticationServiceImpl.getInstance();
     }

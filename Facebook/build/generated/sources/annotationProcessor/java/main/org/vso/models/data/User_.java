@@ -13,7 +13,7 @@ public abstract class User_ {
 	public static volatile SingularAttribute<User, String> lastName;
 	public static volatile SingularAttribute<User, String> password;
 	public static volatile ListAttribute<User, Integer> friendShips;
-	public static volatile SingularAttribute<User, Integer> id;
+	public static volatile SingularAttribute<User, Long> id;
 	public static volatile ListAttribute<User, Post> posts;
 	public static volatile SingularAttribute<User, String> email;
 	public static volatile SingularAttribute<User, Integer> age;
