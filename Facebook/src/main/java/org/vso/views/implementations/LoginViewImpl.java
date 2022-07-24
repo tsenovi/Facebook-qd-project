@@ -39,10 +39,8 @@ public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
         this.loginButton = new JButton();
         this.resetPasswordButton = new JButton();
         this.returnButton = new JButton();
-
         this.emailValidator = new EmailValidatorImpl();
         this.loginPresenter = new LoginPresenterImpl(this);
-
         setupComponents();
     }
 
