@@ -53,7 +53,7 @@ public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (loginButton.equals(source)) {
-            loginPresenter.onLoginButtonClicked();
+            returnToIntermediateScreen();
         } else if (resetPasswordButton.equals(source)) {
             //TODO - redirect to forgotten password page!
         } else if (returnButton.equals(source)) {
@@ -91,6 +91,11 @@ public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
     private void returnToLaunchPage() {
         this.dispose();
         LaunchPage.getInstance().setVisible(true);
+    }
+
+    private void returnToIntermediateScreen(){
+        this.dispose();
+        IntermediateScreen.getInstance().setVisible(true);
     }
 
     private void showMessage(String message) {
