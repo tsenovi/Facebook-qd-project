@@ -55,7 +55,7 @@ public class RegistrationPresenterImpl implements RegistrationPresenter {
 
     private void navigateToProfilePage() {
         registrationView.hideRegistrationPage();
-        this.profileView = new ProfileViewImpl();
+        this.profileView = ProfileViewImpl.getInstance();
     }
 
     private boolean validateRegistrationData(UserRegistrationDTO userRegistrationDTO) {

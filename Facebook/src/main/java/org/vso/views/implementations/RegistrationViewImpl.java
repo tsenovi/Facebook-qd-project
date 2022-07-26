@@ -12,9 +12,10 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class RegistrationViewImpl extends JFrame implements ActionListener, RegistrationView {
+public class RegistrationViewImpl extends BaseFrame implements RegistrationView {
+
+    private static RegistrationViewImpl instance;
     private final JLabel errorEmailMsg;
     private final JLabel emailLabel;
     private final JTextField emailField;
@@ -35,7 +36,7 @@ public class RegistrationViewImpl extends JFrame implements ActionListener, Regi
     private final RegistrationPresenter registrationPresenter;
     private final EmailValidator emailValidator;
 
-    public RegistrationViewImpl() {
+    private RegistrationViewImpl() {
         this.errorEmailMsg = new JLabel();
         this.emailLabel = new JLabel();
         this.emailField = new JTextField();
@@ -58,6 +59,11 @@ public class RegistrationViewImpl extends JFrame implements ActionListener, Regi
         this.emailValidator = new EmailValidatorImpl();
 
         setupComponents();
+    }
+
+    public static RegistrationViewImpl getInstance(){
+        if (instance == null) instance = new RegistrationViewImpl();
+        return instance;
     }
 
     @Override
@@ -168,14 +174,8 @@ public class RegistrationViewImpl extends JFrame implements ActionListener, Regi
         this.add(registrationButton);
         this.add(returnButton);
 
-        ImageIcon icon = new ImageIcon(ImagePathHolder.FRAME_ICON);
-        this.setIconImage(icon.getImage());
         this.setTitle(ComponentText.REGISTER.getText());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBounds(550, 150, 420, 630);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.setVisible(true);
     }
 
     private void setupReturnButton() {

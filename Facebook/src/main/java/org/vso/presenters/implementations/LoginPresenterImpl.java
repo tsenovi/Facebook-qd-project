@@ -43,7 +43,7 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     private void navigateToProfilePage() {
         loginView.hideLoginPage();
-        this.profileView = new ProfileViewImpl();
+        this.profileView = ProfileViewImpl.getInstance();
     }
 
     public interface UserLoginListener {

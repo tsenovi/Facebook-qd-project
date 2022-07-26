@@ -29,6 +29,9 @@ public class User {
     @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
     private List<Post> posts;
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
+    private List<Photo> photos;
+
     protected User() {
     }
 
@@ -94,6 +97,18 @@ public class User {
 
     public void addPosts(Post post) {
         this.posts.add(post);
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void addPhoto(Photo photo) {
+        this.photos.add(photo);
+    }
+
+    public void removePhoto(Photo photo) {
+        this.photos.remove(photo);
     }
 
     @Override
