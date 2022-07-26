@@ -1,8 +1,6 @@
 package org.vso.views.implementations;
 
 import org.vso.constants.ComponentText;
-import org.vso.constants.ImagePathHolder;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +8,12 @@ import java.awt.event.ActionListener;
 public class ProfilePage extends JFrame implements ActionListener {
     private static ProfilePage instance;
     private final JButton personalDataButton;
+    private final JButton editProfileButton;
+
 
     public ProfilePage(){
         this.personalDataButton = new JButton();
+        this.editProfileButton = new JButton();
         setupComponents();
     }
 
@@ -23,13 +24,15 @@ public class ProfilePage extends JFrame implements ActionListener {
 
     private void setupComponents(){
         setupPersonalDataButton();
+        setupEditProfileButton();
         setupFrame();
     }
 
     private void setupFrame(){
         this.add(personalDataButton);
+        this.add(editProfileButton);
 
-        ImageIcon icon = new ImageIcon(ImagePathHolder.FRAME_ICON);
+        ImageIcon icon = new ImageIcon("img.png");
         this.setIconImage(icon.getImage());
         this.setTitle(ComponentText.APP_TITLE.getText());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,11 +49,20 @@ public class ProfilePage extends JFrame implements ActionListener {
         personalDataButton.addActionListener(this);
     }
 
+    private void setupEditProfileButton() {
+        editProfileButton.setText("Edit profile");
+        editProfileButton.setBounds(110, 70, 200, 40);
+        editProfileButton.setFocusable(false);
+        editProfileButton.addActionListener(this);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (personalDataButton.equals(source)) {
             navigateToPersonalData();
+        }else if(editProfileButton.equals(source)){
+            navigateToChangeProfileDataPage();
         }
     }
 
@@ -59,5 +71,8 @@ public class ProfilePage extends JFrame implements ActionListener {
         new PersonalDataPage();
     }
 
-
+    private void navigateToChangeProfileDataPage() {
+        this.dispose();
+        new ChangeProfileDataPage();
+    }
 }

@@ -40,22 +40,22 @@ public class PersonalDataPage extends JFrame implements ActionListener {
     }
 
     private void setupFirstNameLabel(){
-        firstNameLabel.setText("First name: ");
-        firstNameLabel.setBounds(50, 15, 220, 40);
+        firstNameLabel.setText("First name: " + authenticationService.getLoggedUser().getFirstName());
+        firstNameLabel.setBounds(50, 10, 220, 40);
     }
 
     private void setupLastNameLabel(){
-        firstNameLabel.setText("Last name: ");
-        firstNameLabel.setBounds(50, 20, 220, 40);}
+        lastNameLabel.setText("Last name: " + authenticationService.getLoggedUser().getLastName());
+        lastNameLabel.setBounds(50, 40, 220, 40);}
 
     private void setupAgeLabel(){
-        firstNameLabel.setText("Age: ");
-        firstNameLabel.setBounds(50, 25, 220, 40);
+        ageLabel.setText("Age: " + authenticationService.getLoggedUser().getAge());
+        ageLabel.setBounds(50, 70, 220, 40);
     }
 
     private void setupEmailLabel(){
-        firstNameLabel.setText("Email: ");
-        firstNameLabel.setBounds(50, 30, 220, 40);
+        emailLabel.setText("Email: " + authenticationService.getLoggedUser().getEmail());
+        emailLabel.setBounds(50, 100, 220, 40);
     }
 
     private void setupFrame(){
