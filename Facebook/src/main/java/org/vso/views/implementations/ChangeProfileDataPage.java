@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ChangeProfileDataPage extends JFrame implements ActionListener {
+public class ChangeProfileDataPage extends JFrame implements ActionListener{
     private static ChangeProfileDataPage instance;
     private final JButton editPasswordButton;
     private final JButton editEmailButton;
