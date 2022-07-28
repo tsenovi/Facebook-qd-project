@@ -11,10 +11,12 @@ public class ChangeProfileDataPage extends JFrame implements ActionListener{
     private static ChangeProfileDataPage instance;
     private final JButton editPasswordButton;
     private final JButton editEmailButton;
+    private final JButton returnButton;
 
     public ChangeProfileDataPage(){
         this.editPasswordButton = new JButton();
         this.editEmailButton = new JButton();
+        this.returnButton = new JButton();
         setupComponents();
     }
 
@@ -28,12 +30,14 @@ public class ChangeProfileDataPage extends JFrame implements ActionListener{
     private void setupComponents(){
         setupPasswordButton();
         setupEmailButton();
+        setupReturnButton();
         setupFrame();
     }
 
     private void setupFrame() {
         this.add(editPasswordButton);
         this.add(editEmailButton);
+        this.add(returnButton);
 
         ImageIcon icon = new ImageIcon(ImagePathHolder.FRAME_ICON);
         this.setIconImage(icon.getImage());
@@ -59,16 +63,37 @@ public class ChangeProfileDataPage extends JFrame implements ActionListener{
         editPasswordButton.addActionListener(this);
     }
 
+    private void setupReturnButton() {
+        returnButton.setText("return");
+        returnButton.setBounds(150, 150, 120, 40);
+        returnButton.setFocusable(false);
+        returnButton.addActionListener(this);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (this.editEmailButton.equals(source)){
             navigateToChangeEmailPage();
+        }else if (this.editPasswordButton.equals(source)){
+            navigateToChangePasswordPage();
+        }else if (this.returnButton.equals(source)){
+            navigateToProfilePage();
         }
     }
 
     private void navigateToChangeEmailPage(){
         this.dispose();
         new ChangeEmailPage();
+    }
+
+    private void navigateToChangePasswordPage(){
+        this.dispose();
+        new ChangePasswordPage();
+    }
+
+    private void navigateToProfilePage(){
+        this.dispose();
+        new ProfilePage();
     }
 }

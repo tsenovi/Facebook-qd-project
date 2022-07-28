@@ -95,7 +95,7 @@ public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
 
     private void returnToIntermediateScreen(){
         this.dispose();
-        IntermediateScreen.getInstance().setVisible(true);
+        IntermediatePage.getInstance().setVisible(true);
     }
 
     private void showMessage(String message) {

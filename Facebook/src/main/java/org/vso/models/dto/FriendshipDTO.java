@@ -8,7 +8,7 @@ import org.vso.models.services.implementations.AuthenticationServiceImpl;
 import java.util.List;
 
 public class FriendshipDTO {
-    AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
 
     public FriendshipDTO() {
         this.authenticationService = AuthenticationServiceImpl.getInstance();

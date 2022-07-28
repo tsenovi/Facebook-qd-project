@@ -41,20 +41,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return LoginStatus.LOGIN_FAILED;
     }
 
-//    @Override
-//    public User login(UserLoginDTO userLoginInfo) {
-//        User user = userDao.getByEmail(userLoginInfo.getEmail());
-//        if (user == null) {
-//            if (!(user.getPassword().equals(userLoginInfo.getPassword()))) {
-//               throw new RuntimeException();
-//            }
-//        }
-//
-//        loggedUser = user;
-//
-//        return loggedUser;
-//    }
-
     @Override
     public RegistrationStatus registerUser(UserRegistrationDTO userRegistrationDTO) {
         User optionalUser = userDao.getByEmail(userRegistrationDTO.getEmail());
@@ -69,7 +55,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return RegistrationStatus.REGISTRATION_SUCCESSFUL;
     }
 
-    @Override
     public User getLoggedUser() {
         return loggedUser;
     }

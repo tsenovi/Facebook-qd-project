@@ -7,31 +7,35 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class IntermediateScreen extends JFrame implements ActionListener {
-    private static IntermediateScreen instance;
+public class IntermediatePage extends JFrame implements ActionListener {
+    private static IntermediatePage instance;
     private final JButton profilePageButton;
     private final JButton profileWallButton;
+    private final JButton returnButton;
 
-    public IntermediateScreen(){
+    public IntermediatePage(){
         this.profilePageButton = new JButton();
         this.profileWallButton = new JButton();
+        this.returnButton = new JButton();
         setupComponents();
     }
 
-    public static IntermediateScreen getInstance(){
-        if (instance == null) instance = new IntermediateScreen();
+    public static IntermediatePage getInstance(){
+        if (instance == null) instance = new IntermediatePage();
         return instance;
     }
 
     private void setupComponents(){
         setupProfilePageButton();
         setupProfileWallButton();
+        setupReturnButton();
         setupFrame();
     }
 
     private void setupFrame(){
         this.add(profilePageButton);
         this.add(profileWallButton);
+        this.add(returnButton);
 
         ImageIcon icon = new ImageIcon(ImagePathHolder.FRAME_ICON);
         this.setIconImage(icon.getImage());
@@ -52,9 +56,16 @@ public class IntermediateScreen extends JFrame implements ActionListener {
 
     private void setupProfileWallButton(){
         profileWallButton.setText("Profile wall");
-        profileWallButton.setBounds(110, 220, 200, 40);
+        profileWallButton.setBounds(110, 180, 200, 40);
         profileWallButton.setFocusable(false);
         profileWallButton.addActionListener(this);
+    }
+
+    private void setupReturnButton() {
+        returnButton.setText("return");
+        returnButton.setBounds(110, 260, 200, 40);
+        returnButton.setFocusable(false);
+        returnButton.addActionListener(this);
     }
 
     @Override
@@ -65,6 +76,8 @@ public class IntermediateScreen extends JFrame implements ActionListener {
         } else if (profileWallButton.equals(source)) {
             //TODO
             navigateToProfileWall();
+        } else if (returnButton.equals(source)){
+            navigateToLoginPage();
         }
     }
 
@@ -78,4 +91,8 @@ public class IntermediateScreen extends JFrame implements ActionListener {
         new ProfilePage();
     }
 
+    private void navigateToLoginPage(){
+        this.dispose();
+        LoginViewImpl.getInstance().setVisible(true);
+    }
 }

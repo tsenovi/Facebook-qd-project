@@ -4,16 +4,16 @@ import org.vso.constants.ImagePathHolder;
 
 import javax.swing.*;
 
-public class SplashScreen extends JWindow {
+public class SplashPage extends JWindow {
 
-    private static SplashScreen instance;
+    private static SplashPage instance;
 
-    private SplashScreen() {
+    private SplashPage() {
         setupComponents();
     }
 
-    public static SplashScreen getInstance() {
-        if (instance == null) instance = new SplashScreen();
+    public static SplashPage getInstance() {
+        if (instance == null) instance = new SplashPage();
         return instance;
     }
 

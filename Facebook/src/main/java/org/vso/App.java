@@ -1,6 +1,6 @@
 package org.vso;
 
-import org.vso.views.implementations.SplashScreen;
+import org.vso.views.implementations.SplashPage;
 
 import java.util.logging.Level;
 
@@ -14,6 +14,6 @@ public class App {
         //new LoginViewImpl();
 
         //for testing GUI implementation
-        SplashScreen.getInstance();
+        SplashPage.getInstance();
     }
 }

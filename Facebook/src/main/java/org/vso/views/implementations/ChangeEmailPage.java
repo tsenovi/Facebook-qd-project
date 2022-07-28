@@ -2,10 +2,8 @@ package org.vso.views.implementations;
 
 import org.vso.constants.ComponentText;
 import org.vso.constants.ImagePathHolder;
-import org.vso.models.services.contracts.AuthenticationService;
-import org.vso.models.services.implementations.AuthenticationServiceImpl;
-import org.vso.utils.contracts.EmailValidator;
-import org.vso.utils.implementations.EmailValidatorImpl;
+import org.vso.models.services.contracts.ChangeProfileDataService;
+import org.vso.models.services.implementations.ChangeProfileDataServiceImpl;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,8 +16,8 @@ public class ChangeEmailPage extends JFrame implements ActionListener{
     private final JLabel repeatEmailLabel;
     private final JTextField repeatEmailField;
     private final JButton editEmailButton;
-    private final EmailValidator emailValidator;
-    private final AuthenticationService authenticationService;
+    private final JButton returnButton;
+    private final ChangeProfileDataService changeProfileDataService;
 
     public ChangeEmailPage(){
         this.newEmailLabel  = new JLabel();
@@ -27,8 +25,8 @@ public class ChangeEmailPage extends JFrame implements ActionListener{
         this.repeatEmailLabel = new JLabel();
         this.repeatEmailField = new JTextField();
         this.editEmailButton = new JButton();
-        this.emailValidator = new EmailValidatorImpl();
-        this.authenticationService = AuthenticationServiceImpl.getInstance();
+        this.returnButton = new JButton();
+        this.changeProfileDataService = new ChangeProfileDataServiceImpl();
         setupComponents();
     }
 
@@ -45,9 +43,9 @@ public class ChangeEmailPage extends JFrame implements ActionListener{
         setupRepeatEmailLabel();
         setupRepeatEmailField();
         setupEditEmailButton();
+        setupReturnButton();
         setupFrame();
     }
-
 
 
     private void setupFrame() {
@@ -56,6 +54,7 @@ public class ChangeEmailPage extends JFrame implements ActionListener{
         this.add(repeatEmailLabel);
         this.add(repeatEmailField);
         this.add(editEmailButton);
+        this.add(returnButton);
 
         ImageIcon icon = new ImageIcon(ImagePathHolder.FRAME_ICON);
         this.setIconImage(icon.getImage());
@@ -69,36 +68,49 @@ public class ChangeEmailPage extends JFrame implements ActionListener{
 
     private void setupNewEmailLabel() {
         newEmailLabel.setText("new email: ");
-        newEmailLabel.setBounds(50, 120, 80, 40);
+        newEmailLabel.setBounds(50, 90, 80, 40);
     }
 
     private void setupNewEmailField() {
-        newEmailField.setBounds(150, 120, 200, 40);
+        newEmailField.setBounds(150, 90, 200, 40);
     }
 
     private void setupRepeatEmailLabel() {
         repeatEmailLabel.setText("repeat email: ");
-        repeatEmailLabel.setBounds(50, 200, 80, 40);
+        repeatEmailLabel.setBounds(50, 150, 80, 40);
     }
 
     private void setupRepeatEmailField() {
-        repeatEmailField.setBounds(150, 200, 200, 40);
+        repeatEmailField.setBounds(150, 150, 200, 40);
     }
 
     private void setupEditEmailButton() {
         editEmailButton.setText("Edit email");
-        editEmailButton.setBounds(50, 300, 300, 40);
+        editEmailButton.setBounds(50, 200, 300, 40);
         editEmailButton.setFocusable(false);
         editEmailButton.addActionListener(this);
     }
+
+    private void setupReturnButton() {
+        returnButton.setText("return");
+        returnButton.setBounds(50, 250, 300, 40);
+        returnButton.setFocusable(false);
+        returnButton.addActionListener(this);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if (emailValidator.isValidEmail(newEmailField.getText()) &&
-        newEmailField.getText().equals(repeatEmailField.getText())&&
-        editEmailButton.equals(source)){
-            authenticationService.getLoggedUser().setEmail(newEmailField.getText());
-            this.dispose();
+        if (editEmailButton.equals(source)){
+            changeProfileDataService.editEmail(newEmailField.getText(),
+                    repeatEmailField.getText());
+        }else if (returnButton.equals(source)){
+            navigateToChangeProfileDataPage();
         }
+    }
+
+    private void navigateToChangeProfileDataPage(){
+        this.dispose();
+        new ChangeProfileDataPage();
     }
 }
