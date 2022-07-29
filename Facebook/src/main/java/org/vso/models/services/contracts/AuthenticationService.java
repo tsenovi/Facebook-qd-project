@@ -2,7 +2,7 @@ package org.vso.models.services.contracts;
 
 import org.vso.constants.LoginStatus;
 import org.vso.constants.RegistrationStatus;
-import org.vso.models.data.PublicUser;
+import org.vso.models.data.User;
 import org.vso.models.dto.UserLoginDTO;
 import org.vso.models.dto.UserRegistrationDTO;
 
@@ -12,9 +12,11 @@ public interface AuthenticationService {
 
     RegistrationStatus registerUser(UserRegistrationDTO userRegistrationDTO);
 
-    PublicUser getLoggedUser();
+    User getLoggedUser();
 
     boolean hasLoggedUser();
 
     void onUserLogoutSelected();
+
+    void updateUser(User owner);
 }

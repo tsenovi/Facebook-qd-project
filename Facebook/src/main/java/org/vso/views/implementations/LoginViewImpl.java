@@ -124,6 +124,7 @@ public class LoginViewImpl extends BaseFrame implements LoginView {
         this.add(returnButton);
 
         this.setTitle(ComponentText.LOGIN.getText());
+        this.setVisible(true);
     }
 
     private void setupReturnButton() {

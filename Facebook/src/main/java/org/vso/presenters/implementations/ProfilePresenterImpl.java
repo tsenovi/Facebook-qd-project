@@ -4,7 +4,7 @@ import org.vso.models.services.contracts.AuthenticationService;
 import org.vso.models.services.implementations.AuthenticationServiceImpl;
 import org.vso.presenters.contracts.BasePresenter;
 import org.vso.views.contracts.ProfileView;
-import org.vso.views.implementations.UploadPhotoViewImpl;
+import org.vso.views.implementations.UploadImageViewImpl;
 import org.vso.views.implementations.LoginViewImpl;
 
 public class ProfilePresenterImpl implements BasePresenter {
@@ -32,7 +32,7 @@ public class ProfilePresenterImpl implements BasePresenter {
     }
 
     private void navigateToUploadPhotoView() {
-        new UploadPhotoViewImpl();
+        new UploadImageViewImpl();
     }
 
     private void runLogoutProcess() {

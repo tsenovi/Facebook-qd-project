@@ -1,20 +1,18 @@
 package org.vso.utils.implementations;
 
 import org.vso.constants.ComponentText;
+import org.vso.utils.contracts.ImageFileFilter;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
 
-public class ImageFileFilter extends FileFilter {
+public class ImageFileFilterImpl extends FileFilter implements ImageFileFilter {
     public final static String JPEG = "jpeg";
     public final static String JPG = "jpg";
     public final static String GIF = "gif";
     public final static String TIFF = "tiff";
     public final static String TIF = "tif";
     public final static String PNG = "png";
-
-    public ImageFileFilter() {
-    }
 
     @Override
     public boolean accept(File file) {
@@ -39,6 +37,7 @@ public class ImageFileFilter extends FileFilter {
         return ComponentText.IMAGE.getText();
     }
 
+    @Override
     public String getExtension(File file) {
         String extension = null;
         String fileName = file.getName();

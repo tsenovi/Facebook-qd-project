@@ -4,7 +4,6 @@ import org.vso.constants.LoginStatus;
 import org.vso.constants.RegistrationStatus;
 import org.vso.models.dao.contracts.UserDao;
 import org.vso.models.dao.implementations.UserDaoImpl;
-import org.vso.models.data.PublicUser;
 import org.vso.models.data.User;
 import org.vso.models.services.contracts.AuthenticationService;
 import org.vso.models.dto.UserLoginDTO;
@@ -58,8 +57,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public PublicUser getLoggedUser() {
-        return new PublicUser(loggedUser);
+    public void updateUser(User owner) {
+        userDao.update(owner);
+    }
+
+    @Override
+    public User getLoggedUser() {
+        return loggedUser;
     }
 
     @Override

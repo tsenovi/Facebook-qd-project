@@ -53,6 +53,7 @@ public class LaunchPage extends BaseFrame {
         this.add(registrationButton);
 
         this.setTitle(ComponentText.APP_TITLE.getText());
+        this.setVisible(true);
     }
 
     private void setupRegistrationButton() {

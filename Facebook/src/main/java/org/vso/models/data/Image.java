@@ -3,8 +3,8 @@ package org.vso.models.data;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "photos")
-public class Photo {
+@Table(name = "images")
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +20,10 @@ public class Photo {
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User owner;
 
-    public Photo() {
+    public Image() {
     }
 
-    public Photo(User user, String description, String url) {
+    public Image(User user, String description, String url) {
         this.owner = user;
         this.description = description;
         this.url = url;

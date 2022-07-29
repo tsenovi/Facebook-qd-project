@@ -30,7 +30,7 @@ public class User {
     private List<Post> posts;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
-    private List<Photo> photos;
+    private List<Image> images;
 
     protected User() {
     }
@@ -99,16 +99,16 @@ public class User {
         this.posts.add(post);
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void addPhoto(Photo photo) {
-        this.photos.add(photo);
+    public void addImage(Image image) {
+        this.images.add(image);
     }
 
-    public void removePhoto(Photo photo) {
-        this.photos.remove(photo);
+    public void removeImage(Image image) {
+        this.images.remove(image);
     }
 
     @Override

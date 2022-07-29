@@ -19,8 +19,8 @@ public enum ComponentText {
     SAVE_FILE("Save File"),
     DOT("."),
     IMAGE("Image"),
-    UPLOAD_PHOTO("Upload Photo");
-
+    UPLOAD_PHOTO("Upload Photo"),
+    YOUR_THOUGHTS("Your thoughts?");
     private final String text;
 
     ComponentText(String text) {

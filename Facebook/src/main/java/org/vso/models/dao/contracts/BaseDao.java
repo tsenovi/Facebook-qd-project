@@ -11,7 +11,7 @@ public interface BaseDao<T> {
 
     void save(T t);
 
-    void update(T t, String[] params);
+    void update(T t);
 
     void delete(long id);
 }

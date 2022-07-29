@@ -5,13 +5,13 @@ import jakarta.persistence.metamodel.StaticMetamodel;
 import javax.annotation.processing.Generated;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
-@StaticMetamodel(Photo.class)
-public abstract class Photo_ {
+@StaticMetamodel(Image.class)
+public abstract class Image_ {
 
-	public static volatile SingularAttribute<Photo, User> owner;
-	public static volatile SingularAttribute<Photo, String> description;
-	public static volatile SingularAttribute<Photo, Long> id;
-	public static volatile SingularAttribute<Photo, String> url;
+	public static volatile SingularAttribute<Image, User> owner;
+	public static volatile SingularAttribute<Image, String> description;
+	public static volatile SingularAttribute<Image, Long> id;
+	public static volatile SingularAttribute<Image, String> url;
 
 	public static final String OWNER = "owner";
 	public static final String DESCRIPTION = "description";

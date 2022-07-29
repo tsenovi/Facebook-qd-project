@@ -16,6 +16,5 @@ public abstract class BaseFrame extends JFrame implements ActionListener {
         this.setBounds(550, 200, 420, 420);
         this.setResizable(false);
         this.setLayout(null);
-        this.setVisible(true);
     }
 }

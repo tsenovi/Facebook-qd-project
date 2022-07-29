@@ -176,6 +176,7 @@ public class RegistrationViewImpl extends BaseFrame implements RegistrationView 
 
         this.setTitle(ComponentText.REGISTER.getText());
         this.setBounds(550, 150, 420, 630);
+        this.setVisible(true);
     }
 
     private void setupReturnButton() {
