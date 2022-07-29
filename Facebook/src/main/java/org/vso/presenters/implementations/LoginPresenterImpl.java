@@ -12,6 +12,7 @@ import org.vso.views.implementations.ProfileViewImpl;
 public class LoginPresenterImpl implements LoginPresenter {
 
     private final LoginView loginView;
+
     private ProfileView profileView;
 
     private final AuthenticationService authenticationService;

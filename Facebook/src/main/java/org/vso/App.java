@@ -1,5 +1,6 @@
 package org.vso;
 
+import org.vso.views.implementations.LoginViewImpl;
 import org.vso.views.implementations.SplashScreen;
 
 import java.util.logging.Level;
