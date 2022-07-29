@@ -15,7 +15,7 @@ class AuthenticationServiceTest {
     @Test
     void testRegisterUserWhenUserExistsThenRegistrationFail() {
         UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO("ivan@gmail.com", "111",
-                "111", "Ivan", "Tsenov", 31);
+                "Ivan", "Tsenov", 31);
         AuthenticationService authenticationService = AuthenticationServiceImpl.getInstance();
         assertEquals(RegistrationStatus.REGISTRATION_FAILED, authenticationService.registerUser(userRegistrationDTO));
     }
@@ -23,7 +23,7 @@ class AuthenticationServiceTest {
     @Test
     void testRegisterUserWhenUserNotExistsThenRegistrationSuccess() {
         UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO("georgi@gmail.com", "161",
-                "161", "Georgi", "Ivanov", 21);
+                "Georgi", "Ivanov", 21);
         AuthenticationService authenticationService = AuthenticationServiceImpl.getInstance();
         assertEquals(RegistrationStatus.REGISTRATION_SUCCESSFUL, authenticationService.registerUser(userRegistrationDTO));
     }

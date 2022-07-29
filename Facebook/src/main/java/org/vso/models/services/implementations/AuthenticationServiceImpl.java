@@ -4,17 +4,19 @@ import org.vso.constants.LoginStatus;
 import org.vso.constants.RegistrationStatus;
 import org.vso.models.dao.contracts.UserDao;
 import org.vso.models.dao.implementations.UserDaoImpl;
+import org.vso.models.data.PublicUser;
 import org.vso.models.data.User;
 import org.vso.models.services.contracts.AuthenticationService;
 import org.vso.models.dto.UserLoginDTO;
 import org.vso.models.dto.UserRegistrationDTO;
+
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private static AuthenticationService instance;
     private final UserDao<User> userDao;
     private User loggedUser;
 
-    public AuthenticationServiceImpl() {
+    private AuthenticationServiceImpl() {
         this.userDao = new UserDaoImpl();
         this.loggedUser = null;
     }
@@ -56,8 +58,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User getLoggedUser() {
-        return loggedUser;
+    public PublicUser getLoggedUser() {
+        return new PublicUser(loggedUser);
     }
 
     @Override
@@ -72,7 +74,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private User mapUserDTOtoUser(UserRegistrationDTO userRegistrationDTO) {
         return new User(userRegistrationDTO.getEmail(), userRegistrationDTO.getPassword(),
-                userRegistrationDTO.getFirstName(), userRegistrationDTO.getLastName(),
-                userRegistrationDTO.getAge());
+                userRegistrationDTO.getFirstName(), userRegistrationDTO.getLastName(), userRegistrationDTO.getAge());
     }
 }

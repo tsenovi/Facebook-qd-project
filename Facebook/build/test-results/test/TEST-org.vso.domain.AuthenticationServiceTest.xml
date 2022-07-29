@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.vso.domain.AuthenticationServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-07-03T22:16:46" hostname="DESKTOP-NBQ4J5Q" time="3.001">
+  <properties/>
+  <testcase name="testLoginWhenUserNotExistsThenLoginFailed()" classname="org.vso.domain.AuthenticationServiceTest" time="3.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Jul 04, 2022 1:16:46 AM org.hibernate.jpa.internal.util.LogHelper logPersistenceUnitInformation
+INFO: HHH000204: Processing PersistenceUnitInfo [name: Facebook]
+Jul 04, 2022 1:16:46 AM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate ORM core version 5.6.9.Final
+Jul 04, 2022 1:16:47 AM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+Jul 04, 2022 1:16:47 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+Jul 04, 2022 1:16:47 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/Facebook]
+Jul 04, 2022 1:16:47 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001001: Connection properties: {password=****, user=postgres}
+Jul 04, 2022 1:16:47 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001003: Autocommit mode: false
+Jul 04, 2022 1:16:47 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
+INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
+Jul 04, 2022 1:16:48 AM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL82Dialect
+Jul 04, 2022 1:16:49 AM org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@314b9e4b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Jul 04, 2022 1:16:49 AM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+]]></system-err>
+</testsuite>
