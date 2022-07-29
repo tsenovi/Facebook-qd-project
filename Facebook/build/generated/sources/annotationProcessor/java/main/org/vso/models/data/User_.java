@@ -12,18 +12,22 @@ public abstract class User_ {
 	public static volatile SingularAttribute<User, String> firstName;
 	public static volatile SingularAttribute<User, String> lastName;
 	public static volatile SingularAttribute<User, String> password;
+	public static volatile ListAttribute<User, Integer> friendShips;
 	public static volatile SingularAttribute<User, Long> id;
 	public static volatile ListAttribute<User, Post> posts;
 	public static volatile SingularAttribute<User, String> email;
 	public static volatile SingularAttribute<User, Integer> age;
+	public static volatile ListAttribute<User, Integer> friends;
 
 	public static final String FIRST_NAME = "firstName";
 	public static final String LAST_NAME = "lastName";
 	public static final String PASSWORD = "password";
+	public static final String FRIEND_SHIPS = "friendShips";
 	public static final String ID = "id";
 	public static final String POSTS = "posts";
 	public static final String EMAIL = "email";
 	public static final String AGE = "age";
+	public static final String FRIENDS = "friends";
 
 }
 
