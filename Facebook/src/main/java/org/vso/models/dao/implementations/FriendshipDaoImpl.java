@@ -10,6 +10,8 @@ import jakarta.persistence.criteria.Root;
 import org.vso.models.dao.contracts.FriendshipDao;
 import org.vso.models.data.Friendship;
 import org.vso.models.data.Friendship_;
+import org.vso.models.data.User;
+import org.vso.models.data.User_;
 import org.vso.utils.contracts.Hibernate;
 import org.vso.utils.implementations.HibernateImpl;
 
@@ -86,7 +88,16 @@ public class FriendshipDaoImpl implements FriendshipDao<Friendship> {
 
     @Override
     public void delete(long id) {
+        EntityManager entityManager = getEntityManagerInTransaction();
 
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaDelete<Friendship> delete = builder.createCriteriaDelete(Friendship.class);
+        Root<Friendship> root = delete.from(Friendship.class);
+        delete.where(builder.lessThanOrEqualTo(root.get(Friendship_.ID), id));
+
+        entityManager.createQuery(delete).executeUpdate();
+
+        closeEntityManagerInTransaction(entityManager);
     }
 
     @Override

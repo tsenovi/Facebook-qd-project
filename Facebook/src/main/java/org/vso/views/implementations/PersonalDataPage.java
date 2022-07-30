@@ -2,7 +2,7 @@ package org.vso.views.implementations;
 
 import org.vso.constants.ComponentText;
 import org.vso.constants.ImagePathHolder;
-import org.vso.models.services.contracts.AuthenticationService;
+import org.vso.models.data.User;
 import org.vso.models.services.implementations.AuthenticationServiceImpl;
 
 import javax.swing.*;
@@ -15,14 +15,14 @@ public class PersonalDataPage extends JFrame implements ActionListener {
     private final JLabel lastNameLabel;
     private final JLabel ageLabel;
     private final JLabel emailLabel;
-    private final AuthenticationService authenticationService;
+    private final User loggedUser;
 
     public PersonalDataPage(){
         this.firstNameLabel = new JLabel();
         this.lastNameLabel = new JLabel();
         this.ageLabel = new JLabel();
         this.emailLabel = new JLabel();
-        this.authenticationService = AuthenticationServiceImpl.getInstance();
+        this.loggedUser = AuthenticationServiceImpl.getInstance().getLoggedUser();
         setupComponents();
     }
 
@@ -40,21 +40,21 @@ public class PersonalDataPage extends JFrame implements ActionListener {
     }
 
     private void setupFirstNameLabel(){
-        firstNameLabel.setText("First name: " + authenticationService.getLoggedUser().getFirstName());
+        firstNameLabel.setText(loggedUser.getFirstName());
         firstNameLabel.setBounds(50, 10, 220, 40);
     }
 
     private void setupLastNameLabel(){
-        lastNameLabel.setText("Last name: " + authenticationService.getLoggedUser().getLastName());
+        lastNameLabel.setText(loggedUser.getLastName());
         lastNameLabel.setBounds(50, 40, 220, 40);}
 
     private void setupAgeLabel(){
-        ageLabel.setText("Age: " + authenticationService.getLoggedUser().getAge());
+        ageLabel.setText(Integer.toString(loggedUser.getAge()));
         ageLabel.setBounds(50, 70, 220, 40);
     }
 
     private void setupEmailLabel(){
-        emailLabel.setText("Email: " + authenticationService.getLoggedUser().getEmail());
+        emailLabel.setText(loggedUser.getEmail());
         emailLabel.setBounds(50, 100, 220, 40);
     }
 

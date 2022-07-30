@@ -10,11 +10,13 @@ public class ProfilePage extends JFrame implements ActionListener {
     private final JButton personalDataButton;
     private final JButton editProfileButton;
     private final JButton returnButton;
+    private final JButton sentAFriendRequestButton;
 
     public ProfilePage(){
         this.personalDataButton = new JButton();
         this.editProfileButton = new JButton();
         this.returnButton = new JButton();
+        this.sentAFriendRequestButton = new JButton();
         setupComponents();
     }
 
@@ -27,6 +29,7 @@ public class ProfilePage extends JFrame implements ActionListener {
         setupPersonalDataButton();
         setupEditProfileButton();
         setupReturnButton();
+        setupSentAFriendRequestButton();
         setupFrame();
     }
 
@@ -34,6 +37,7 @@ public class ProfilePage extends JFrame implements ActionListener {
         this.add(personalDataButton);
         this.add(editProfileButton);
         this.add(returnButton);
+        this.add(sentAFriendRequestButton);
 
         ImageIcon icon = new ImageIcon("img.png");
         this.setIconImage(icon.getImage());
@@ -47,21 +51,28 @@ public class ProfilePage extends JFrame implements ActionListener {
 
     private void setupPersonalDataButton(){
         personalDataButton.setText("Personal data");
-        personalDataButton.setBounds(110, 100, 200, 40);
+        personalDataButton.setBounds(110, 50, 200, 40);
         personalDataButton.setFocusable(false);
         personalDataButton.addActionListener(this);
     }
 
     private void setupEditProfileButton() {
         editProfileButton.setText("Edit profile");
-        editProfileButton.setBounds(110, 180, 200, 40);
+        editProfileButton.setBounds(110, 130, 200, 40);
         editProfileButton.setFocusable(false);
         editProfileButton.addActionListener(this);
     }
 
+    private void setupSentAFriendRequestButton() {
+        sentAFriendRequestButton.setText("sent a friend request");
+        sentAFriendRequestButton.setBounds(110, 200, 200, 40);
+        sentAFriendRequestButton.setFocusable(false);
+        sentAFriendRequestButton.addActionListener(this);
+    }
+
     private void setupReturnButton() {
         returnButton.setText("return");
-        returnButton.setBounds(110, 260, 200, 40);
+        returnButton.setBounds(110, 280, 200, 40);
         returnButton.setFocusable(false);
         returnButton.addActionListener(this);
     }
@@ -73,9 +84,16 @@ public class ProfilePage extends JFrame implements ActionListener {
             navigateToPersonalData();
         }else if(editProfileButton.equals(source)){
             navigateToChangeProfileDataPage();
+        }else if (sentAFriendRequestButton.equals(source)){
+
         }else if (returnButton.equals(source)){
             navigateToIntermediatePage();
         }
+    }
+
+    private void navigateToSentAFriendRequestView(){
+        this.dispose();
+        new SentAFriendRequestView();
     }
 
     private void navigateToPersonalData() {
