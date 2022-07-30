@@ -4,6 +4,7 @@ import org.vso.models.services.contracts.AuthenticationService;
 import org.vso.models.services.implementations.AuthenticationServiceImpl;
 import org.vso.presenters.contracts.BasePresenter;
 import org.vso.views.contracts.ProfileView;
+import org.vso.views.implementations.UploadImageViewImpl;
 import org.vso.views.implementations.LoginViewImpl;
 
 public class ProfilePresenterImpl implements BasePresenter {
@@ -19,14 +20,19 @@ public class ProfilePresenterImpl implements BasePresenter {
 
     @Override
     public void onViewShown() {
-        while (authenticationService.hasLoggedUser()) {
+//        while (authenticationService.hasLoggedUser()) {
             profileView.showProfileOptions();
             int userOption = profileView.getUserDecimalInput();
             switch (userOption) {
                 case 1 -> runLogoutProcess();
+                case 2 -> navigateToUploadPhotoView();
                 default -> profileView.showOptionError();
             }
-        }
+//        }
+    }
+
+    private void navigateToUploadPhotoView() {
+        new UploadImageViewImpl();
     }
 
     private void runLogoutProcess() {

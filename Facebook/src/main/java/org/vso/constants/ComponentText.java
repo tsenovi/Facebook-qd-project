@@ -14,8 +14,13 @@ public enum ComponentText {
     AGE("Age:"),
     INVALID_EMAIL_INPUT("Invalid email input!"),
     PASSWORDS_MUST_MATCH("Passwords must match!"),
-    AGE_REQUIREMENT("You must be over 14 to register!");
-
+    AGE_REQUIREMENT("You must be over 14 to register!"),
+    SELECT_FILE("Select File"),
+    SAVE_FILE("Save File"),
+    DOT("."),
+    IMAGE("Image"),
+    UPLOAD_PHOTO("Upload Photo"),
+    YOUR_THOUGHTS("Your thoughts?");
     private final String text;
 
     ComponentText(String text) {

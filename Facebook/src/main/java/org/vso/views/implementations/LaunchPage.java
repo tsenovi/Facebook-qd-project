@@ -1,13 +1,11 @@
 package org.vso.views.implementations;
 
 import org.vso.constants.ComponentText;
-import org.vso.constants.ImagePathHolder;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class LaunchPage extends JFrame implements ActionListener {
+public class LaunchPage extends BaseFrame {
     private static LaunchPage instance;
     private final JButton loginButton;
     private final JButton registrationButton;
@@ -30,14 +28,13 @@ public class LaunchPage extends JFrame implements ActionListener {
         if (loginButton.equals(source)) {
             navigateToLoginPage();
         } else if (registrationButton.equals(source)) {
-            //TODO
             navigateToRegistrationPage();
         }
     }
 
     private void navigateToRegistrationPage() {
         this.dispose();
-        new RegistrationViewImpl();
+        RegistrationViewImpl.getInstance().setVisible(true);
     }
 
     private void navigateToLoginPage() {
@@ -55,13 +52,7 @@ public class LaunchPage extends JFrame implements ActionListener {
         this.add(loginButton);
         this.add(registrationButton);
 
-        ImageIcon icon = new ImageIcon(ImagePathHolder.FRAME_ICON);
-        this.setIconImage(icon.getImage());
         this.setTitle(ComponentText.APP_TITLE.getText());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setBounds(550, 200, 420, 420);
-        this.setResizable(false);
-        this.setLayout(null);
         this.setVisible(true);
     }
 

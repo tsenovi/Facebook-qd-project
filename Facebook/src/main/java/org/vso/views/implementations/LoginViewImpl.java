@@ -1,7 +1,6 @@
 package org.vso.views.implementations;
 
 import org.vso.constants.ComponentText;
-import org.vso.constants.ImagePathHolder;
 import org.vso.constants.LoginStatus;
 import org.vso.presenters.contracts.LoginPresenter;
 import org.vso.presenters.implementations.LoginPresenterImpl;
@@ -14,9 +13,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
+public class LoginViewImpl extends BaseFrame implements LoginView {
 
     private static LoginViewImpl instance;
     private final JLabel errorMsg;
@@ -125,13 +123,7 @@ public class LoginViewImpl extends JFrame implements ActionListener, LoginView {
         this.add(resetPasswordButton);
         this.add(returnButton);
 
-        ImageIcon icon = new ImageIcon(ImagePathHolder.FRAME_ICON);
-        this.setIconImage(icon.getImage());
         this.setTitle(ComponentText.LOGIN.getText());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setBounds(550, 200, 420, 420);
-        this.setResizable(false);
-        this.setLayout(null);
         this.setVisible(true);
     }
 
