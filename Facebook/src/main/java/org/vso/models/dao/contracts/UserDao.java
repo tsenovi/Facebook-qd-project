@@ -5,4 +5,6 @@ import org.vso.models.data.User;
 public interface UserDao<T> extends BaseDao<T> {
 
     User getByEmail(String email);
+
+    User getByName(String name);
 }

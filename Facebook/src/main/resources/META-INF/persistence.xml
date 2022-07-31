@@ -7,6 +7,7 @@
         <class>org.vso.models.data.User</class>
         <class>org.vso.models.data.Friendship</class>
         <class>org.vso.models.data.Post</class>
+        <class>org.vso.models.data.Image</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Facebook" />

@@ -7,6 +7,7 @@ import org.vso.models.dto.UserLoginDTO;
 import org.vso.presenters.contracts.LoginPresenter;
 import org.vso.views.contracts.LoginView;
 import org.vso.views.contracts.ProfileView;
+import org.vso.views.implementations.ProfileOptionsScreen;
 import org.vso.views.implementations.ProfileViewImpl;
 
 public class LoginPresenterImpl implements LoginPresenter {
@@ -34,15 +35,14 @@ public class LoginPresenterImpl implements LoginPresenter {
         LoginStatus loginStatus = authenticationService.login(userLoginDTO);
         if (loginStatus == LoginStatus.LOGIN_SUCCESSFUL) {
             loginView.showLoginSuccessful();
-            navigateToProfilePage();
+            navigateToProfileOptionsScreen();
         } else {
             loginView.showLoginFailed();
         }
     }
 
-    private void navigateToProfilePage() {
-        loginView.hideLoginPage();
-        this.profileView = new ProfileViewImpl();
+    private void navigateToProfileOptionsScreen() {
+        new ProfileOptionsScreen();
     }
 
     public interface UserLoginListener {

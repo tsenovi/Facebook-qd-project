@@ -17,4 +17,6 @@ public interface AuthenticationService {
     boolean hasLoggedUser();
 
     void onUserLogoutSelected();
+
+    void updateUser(User owner);
 }

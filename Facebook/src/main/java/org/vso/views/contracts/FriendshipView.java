@@ -1,8 +1,10 @@
 package org.vso.views.contracts;
 
+import org.vso.models.data.User;
+
 public interface FriendshipView {
 
-    void showAllFriendRequestsOfAUser();
+    void showAllFriendRequestsByUser(User user);
 
     void showChooseFriendRequest();
 
@@ -13,4 +15,5 @@ public interface FriendshipView {
     void showAccepted();
 
     void showDeclined();
+
 }

@@ -34,7 +34,7 @@ public class FriendshipDTO {
         friendList.add(friend);
     }
 
-    public void removeFriendShipOfTheLoggedUser(Friendship friendship){
+    public void removeFriendshipOfTheLoggedUser(Friendship friendship){
         getFriendShipsOfTheLoggedUser().remove(friendship);
     }
 }

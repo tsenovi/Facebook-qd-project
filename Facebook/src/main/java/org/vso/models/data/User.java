@@ -39,6 +39,10 @@ public class User {
     @ElementCollection(targetClass = Integer.class)
     private List<User> friends;
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
+    private List<Image> images;
+
+
     protected User() {
     }
 
@@ -103,6 +107,18 @@ public class User {
     }
 
     public void addFriend(User friend){this.getFriends().add(friend);}
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void addImage(Image image) {
+        this.images.add(image);
+    }
+
+    public void removeImage(Image image) {
+        this.images.remove(image);
+    }
 
     @Override
     public String toString() {

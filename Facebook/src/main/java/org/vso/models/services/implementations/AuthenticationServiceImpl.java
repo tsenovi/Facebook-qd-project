@@ -55,6 +55,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return RegistrationStatus.REGISTRATION_SUCCESSFUL;
     }
 
+    @Override
+    public void updateUser(User owner) {
+        userDao.update(owner);
+    }
+
+    @Override
     public User getLoggedUser() {
         return loggedUser;
     }

@@ -3,10 +3,7 @@ package org.vso.models.dao.implementations;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceUnit;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaDelete;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import org.vso.models.dao.contracts.UserDao;
 import org.vso.models.data.User;
 import org.vso.models.data.User_;
@@ -65,6 +62,22 @@ public class UserDaoImpl implements UserDao<User> {
     }
 
     @Override
+    public User getByName(String name) {
+        EntityManager entityManager = getEntityManagerInTransaction();
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        Root<User> root = criteria.from(User.class);
+        criteria.select(root);
+        criteria.where(builder.equal(root.get(User_.FIRST_NAME), name));
+        User user = entityManager.createQuery(criteria).getResultList().stream().findFirst().orElse(null);
+
+        closeEntityManagerInTransaction(entityManager);
+
+        return user;
+    }
+
+    @Override
     public Optional<User> get(long id) {
         EntityManager entityManager = getEntityManagerInTransaction();
 
@@ -105,10 +118,18 @@ public class UserDaoImpl implements UserDao<User> {
         closeEntityManagerInTransaction(entityManager);
     }
 
-    //TODO
     @Override
-    public void update(User user, String[] params) {
+    public void update(User user) {
+        EntityManager entityManager = getEntityManagerInTransaction();
 
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaUpdate<User> update = builder.createCriteriaUpdate(User.class);
+        Root<User> root = update.from(User.class);
+        update.where(builder.lessThanOrEqualTo(root.get(User_.ID), user.getId()));
+
+        entityManager.createQuery(update).executeUpdate();
+
+        closeEntityManagerInTransaction(entityManager);
     }
 
     @Override

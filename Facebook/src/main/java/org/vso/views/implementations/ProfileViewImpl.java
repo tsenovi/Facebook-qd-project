@@ -8,14 +8,24 @@ import java.util.Scanner;
 
 public class ProfileViewImpl implements ProfileView {
 
+    private static ProfileViewImpl instance;
+
     private final BasePresenter profilePresenter;
 
     private final Scanner scanner;
 
-    public ProfileViewImpl() {
+    private ProfileViewImpl() {
         this.profilePresenter = new ProfilePresenterImpl(this);
         this.scanner = new Scanner(System.in);
+    }
+
+    public void setVisible(){
         profilePresenter.onViewShown();
+    }
+
+    public static ProfileViewImpl getInstance() {
+        if (instance == null) instance = new ProfileViewImpl();
+        return instance;
     }
 
     @Override
@@ -34,15 +44,6 @@ public class ProfileViewImpl implements ProfileView {
     }
 
     @Override
-    public void showProfileOptions() {
-        show("\\tProfile Options\n" +
-                "1. Logout\n" +
-                "2. Search\n" +
-                "3. Sent a friend request\n" +
-                "4. Your friend requests");
-    }
-
-    @Override
     public void showOptionError() {
         show("No such option!");
     }
@@ -50,5 +51,16 @@ public class ProfileViewImpl implements ProfileView {
     @Override
     public void onUserLogoutSelected() {
         show("Logout Successful!");
+    }
+
+    @Override
+    public void showProfileOptions() {
+        show("Profile Options\n" +
+                "1. Logout\n" +
+                "2. Upload Photo\n" +
+                "3. Search\n" +
+                "4. Sent a friend request\n" +
+                "5. Your friend requests"
+        );
     }
 }

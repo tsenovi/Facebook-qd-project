@@ -10,8 +10,6 @@ import jakarta.persistence.criteria.Root;
 import org.vso.models.dao.contracts.FriendshipDao;
 import org.vso.models.data.Friendship;
 import org.vso.models.data.Friendship_;
-import org.vso.models.data.User;
-import org.vso.models.data.User_;
 import org.vso.utils.contracts.Hibernate;
 import org.vso.utils.implementations.HibernateImpl;
 
@@ -82,7 +80,7 @@ public class FriendshipDaoImpl implements FriendshipDao<Friendship> {
     }
 
     @Override
-    public void update(Friendship friendRequest, String[] params) {
+    public void update(Friendship friendship) {
 
     }
 
